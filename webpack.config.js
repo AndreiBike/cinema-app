@@ -1,12 +1,15 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     //Setting the environment
-    entry: "./src/index.js",
+    entry: "./src/index.js", //entry point
     mode: "development",
-    output: {
+    output: {// output point
+      path: path.join (__dirname, "/cinApp"),
       filename: "./main.js"
     },  
+    plugins: [new HtmlWebpackPlugin({template: './dist/index.html'})], //template for index.html file
     
     //Setting the DevServer
     devServer: {
@@ -15,6 +18,7 @@ module.exports = {
       port: 3000, //number of port of our server
       watchContentBase: true,  //watching for the content in folders
       progress: true
+
     },
   
 
