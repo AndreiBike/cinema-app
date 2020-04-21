@@ -2,5 +2,16 @@
     "presets":[
       "@babel/env",
       "@babel/react"
+    ],
+
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "@root": "./src"
+          }
+        }
+      ]
     ]
 }
