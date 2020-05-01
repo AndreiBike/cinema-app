@@ -1,33 +1,27 @@
 import React from 'react';
+import style from './App.module.css';
+import FooterContainer from '@root/client/components/footer/FooterContainer'
+import HeaderContainer from '@root/client/components/header/HeaderContainer';
+import SortbarContainer from '@root/client/components/sortbar/SortbarContainer';
+import MoviesContainer from '@root/client/components/movies/MoviesContainer';
+import ErrorBoundary from '@root/client/components/errorBoundary/ErrorBoundary';
+import DescriptionContainer from '@root/client/components/description/DescriptionContainer';
 
-// Creating element using React.Component
-class App extends React.Component {
 
-  render() {
+const App = (props)=> {
     return (
-      // Creating element using React.createElement
-      React.createElement("div", null, <h1>Hallo world (React.CreateElement)</h1>, <PureComp />, <FuncComp />)
-    )
-  }
-}
-
-// Creating element using React.PureComponent
-class PureComp extends React.PureComponent {
-
-  render() {
-    return (
-      <div>
-        <h1>Hallo world (React.PureComponent)</h1>
+      <div className = {style.app}>
+        <div className = {style.content}>
+        <ErrorBoundary>
+         { <HeaderContainer /> }
+          <DescriptionContainer />
+          <SortbarContainer />
+          <MoviesContainer />
+          <FooterContainer />
+        </ErrorBoundary>
+        </div>
       </div>
     )
-  }
-}
-
-// Creating element using functional component
-const FuncComp = (props) => {
-  return (
-    <h1>Hallo world (FunctionalComponent)</h1>
-  )
 }
 
 export default App;
