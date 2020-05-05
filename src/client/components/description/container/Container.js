@@ -1,12 +1,18 @@
 import React from 'react';
 import styles from './Container.module.css';
-import poster from '@root/client/images/poster.jpg'
 
 const Container = (props) => {
+  const {
+    movie: {
+      name,
+      rating,
+    }
+  } = props;
+
   return (
     <div className = {styles.container}>
       <div className ={styles.image}>
-        <img src={poster}/>
+        <img src="./assets/poster.jpg" />
       </div>
       <div className = {styles.description}>
         <div className= {styles.nameRating}>
@@ -17,7 +23,7 @@ const Container = (props) => {
           {props.movie.gengre}
         </div>
         <div className={styles.yearDuration}>
-          <span className={styles.beautify}> {props.movie.year} </span> year 
+          <span className={styles.beautify}> {props.movie.year} </span> year
           <span className={styles.beautify}> {props.movie.duration} </span> min
         </div>
 

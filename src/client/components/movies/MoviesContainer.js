@@ -9,7 +9,7 @@ class MoviesContainer extends React.Component {
       movies: [
         {
           id: 1,
-          imageWay: 'poster.jpg',
+          imageWay: './assets/poster.jpg',
           name: "Avengers: Infinity War",
           year: 2020,
           gengre: "Action & Adventure",
@@ -17,7 +17,7 @@ class MoviesContainer extends React.Component {
 
         {
           id: 2,
-          imageWay: 'poster.jpg',
+          imageWay: './assets/poster.jpg',
           name: "Avengers: Infinity War",
           year: 2021,
           gengre: "Action & Adventure",
@@ -25,7 +25,7 @@ class MoviesContainer extends React.Component {
 
         {
           id: 3,
-          imageWay: 'poster.jpg',
+          imageWay: './assets/poster.jpg',
           name: "Avengers: Infinity War",
           year: 2022,
           gengre: "Action & Adventure",

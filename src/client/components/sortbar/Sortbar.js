@@ -15,9 +15,11 @@ const Sortbar = (props) => {
       <label className={styles.label}>
         SORT BY
       </label>
-      <button className={styles.releaseButton}
+      <button
+        className={styles.releaseButton}
         style={props.sortByReleaseDate.status ? activeStyle : passiveStyle}
-        onClick={props.clickReleaseDate}>
+        onClick={props.clickReleaseDate}
+      >
         <span>
           {props.sortByReleaseDate.label}
         </span>

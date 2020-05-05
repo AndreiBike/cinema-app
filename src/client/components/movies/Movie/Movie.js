@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from './Movie.module.css';
-import poster from '../../../images/poster.jpg'
 
 const  Movie = (props) => {
   return(
     <div className = {styles.movie}>
       <div className = {styles.poster}>      
-        <img src={poster}/>
+        <img src={props.imageWay} />
       </div>
 
       <div className = {styles.filmName}>

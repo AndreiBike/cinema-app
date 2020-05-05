@@ -4,7 +4,7 @@ import SearchContainer from '@root/client/components/header/search/SearchContain
 import headerPicture from '@root/client/images/headerPicture.jpg';
 
 
-const Header = (props) => {
+export const Header = (props) => {
   return (
     <div className={styles.header}>
 
@@ -22,5 +22,3 @@ const Header = (props) => {
     </div>
   )
 }
-
-export default Header;
