@@ -14,17 +14,6 @@ class MovieContainer extends React.Component {
     }
   }
 
-/*
-  componentDidMount(){
-    this.setState({
-      id: this.props.movie.id,
-      imageWay: this.props.movie.imageWay,
-      name: this.props.movie.name,
-      year: this.props.movie.year,
-      gengre: this.props.movie.gengre,
-    })
-  }
-*/
   render() {
     return (
       <>
