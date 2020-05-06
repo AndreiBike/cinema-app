@@ -3,3 +3,5 @@
 /dist
 /.pnp
 .pnp.js
+.idea/
+yarn.lock

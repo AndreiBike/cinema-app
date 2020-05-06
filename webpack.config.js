@@ -1,6 +1,7 @@
 const webpack = require(`webpack`);
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = function (webpackEnv) {
   const isEnvDevelopment = process.env.NODE_ENV === 'development';
@@ -13,7 +14,13 @@ module.exports = function (webpackEnv) {
       path: path.join(__dirname, "/dist"),
       filename: "./main.js"
     },
-    plugins: [new HtmlWebpackPlugin({ template: './template/index.html' })], //template for index.html file
+    plugins: [
+      new HtmlWebpackPlugin({ template: './template/index.html' }),
+      new CopyPlugin([{
+        from: path.join(__dirname, "/src/client/images"),
+        to: 'assets'
+      }])
+    ], //template for index.html file
 
     //Setting the DevServer
     devServer: isEnvDevelopment ? {
@@ -42,15 +49,9 @@ module.exports = function (webpackEnv) {
           test: /\.css$/,
           use: [
             "style-loader",
-            {
-              loader: "css-loader",
-              options: {
-                modules: true
-              }
-            }
+            "css-loader"
           ]
         },
-
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: ["file-loader"]
