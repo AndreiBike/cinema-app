@@ -7,13 +7,12 @@ import MoviesContainer from '@root/client/components/movies/MoviesContainer';
 import ErrorBoundary from '@root/client/components/errorBoundary/ErrorBoundary';
 import DescriptionContainer from '@root/client/components/description/DescriptionContainer';
 
-
 const App = (props)=> {
     return (
       <div className = {style.app}>
         <div className = {style.content}>
         <ErrorBoundary>
-         { <HeaderContainer /> }
+          <HeaderContainer /> 
           <DescriptionContainer />
           <SortbarContainer />
           <MoviesContainer />

@@ -22,6 +22,7 @@ const Sortbar = (props) => {
           {props.sortByReleaseDate.label}
         </span>
       </button>
+
       <button className={styles.ratingButton}
         style={props.sortByRating.status ? activeStyle : passiveStyle}
         onClick={props.clickRating}>
@@ -29,6 +30,7 @@ const Sortbar = (props) => {
           {props.sortByRating.label}
         </span>
       </button>
+
     </div>
   )
 }

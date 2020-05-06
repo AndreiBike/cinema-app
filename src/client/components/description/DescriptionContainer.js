@@ -1,13 +1,14 @@
 import React from 'react';
 import Description from '@root/client/components/description/Description'
+import { getMovieById } from "@root/client/store/store"
 
 class DescriptionContainer extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-
+    this.isUnmount = false;
     this.state = {
-      movie :{
+      movie: {
         id: 1,
         name: "Avengers infinity war",
         rating: 4.3,
@@ -19,9 +20,23 @@ class DescriptionContainer extends React.Component {
     }
   }
 
-  render(){
+  componentDidMount() {
+    getMovieById(2).then((mov) => {
+      if (this.isUnmount === false) {
+        this.setState({
+          movie: mov
+        })
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this.isUnmount = true;
+  }
+
+  render() {
     return (
-      <Description movie = {this.state.movie}/>
+      <Description movie={this.state.movie} />
     )
   }
 }

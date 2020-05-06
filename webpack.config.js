@@ -23,7 +23,7 @@ module.exports = function (webpackEnv) {
       watchContentBase: true,  //watching for the content in folders
       progress: true
 
-    }: undefined,
+    } : undefined,
 
     devtool: isEnvDevelopment ? 'source-map' : undefined,
 
