@@ -2,7 +2,7 @@ const data =
   {movies: [
     {
       id: 1,
-      imageWay: 'poster.jpg',
+      imageWay: './assets/poster.jpg',
       name: "Avengers: Infinity War",
       year: 2020,
       gengre: "Action & Adventure",
@@ -13,7 +13,7 @@ const data =
 
     {
       id: 2,
-      imageWay: 'poster.jpg',
+      imageWay: './assets/poster.jpg',
       name: "Avengers: Infinity War 2",
       year: 2020,
       gengre: "Action & Adventure",
@@ -24,7 +24,7 @@ const data =
 
     {
       id: 3,
-      imageWay: 'poster.jpg',
+      imageWay: './assets/poster.jpg',
       name: "Avengers: Infinity War 3",
       year: 2020,
       gengre: "Action & Adventure",
