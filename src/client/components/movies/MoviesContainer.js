@@ -9,6 +9,7 @@ class MoviesContainer extends React.Component {
     this.isUnmount = false; 
     this.isLoading = false;
     this.state = {
+<<<<<<< HEAD
       movies:[],
     }
   }
@@ -23,6 +24,36 @@ class MoviesContainer extends React.Component {
 
   componentWillUnmount(){
     this.isUnmount = true;
+=======
+      movies: [
+        {
+          id: 1,
+          imageWay: './assets/poster.jpg',
+          name: "Avengers: Infinity War",
+          year: 2020,
+          gengre: "Action & Adventure",
+        },
+
+        {
+          id: 2,
+          imageWay: './assets/poster.jpg',
+          name: "Avengers: Infinity War",
+          year: 2021,
+          gengre: "Action & Adventure",
+        },
+
+        {
+          id: 3,
+          imageWay: './assets/poster.jpg',
+          name: "Avengers: Infinity War",
+          year: 2022,
+          gengre: "Action & Adventure",
+        },
+      ]
+      
+      //movies:[],
+    }
+>>>>>>> origin/develop
   }
 
   render() {
