@@ -1,6 +1,34 @@
 .header{
+  display: block;
   width: 1200px;
   height: 396px; 
+  background-image: url(https://avatars.mds.yandex.net/get-pdb/1792436/ad89a1a5-b947-49f3-987c-af320848bbb0/s1200);
+}
+
+.header-netflixroulette{
+  font-family: Montserrat;
+  color: #f65261;
+  padding-top: 20px;
+  padding-left: 60px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.header-netflixroulette span{
+  font-weight: 700;
+}
+
+.header-find-your-movie{
+  padding-top: 57px;
+  padding-left: 120px;
+  color: white;
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 49px;
 }
 
 .background{
@@ -19,7 +47,7 @@
   filter: blur(5px);
 }
 
-.netflixRoulette {
+.netflixRoulette label{
   position: absolute;
   top: 20px;
   left: 60px; 

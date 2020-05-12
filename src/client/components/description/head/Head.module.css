@@ -1,4 +1,4 @@
-.netflixRoulette{
+.head-netflix-roulette{
   height: 24px;
   width: 151px;
   color: #f65261;
@@ -19,13 +19,13 @@
   padding-right: 38px;
 }
 
-.searchIcon {
+.head-search-icon {
   z-index: 1;
   background-color: white;
   height: 32px;
   width: 32px;
 }
 
-.searchIcon img{
+.head-search-icon img{
   width: 100%;
 }

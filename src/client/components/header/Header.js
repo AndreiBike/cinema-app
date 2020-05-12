@@ -1,24 +1,23 @@
 import React from 'react';
-import styles from './Header.module.css';
-import SearchContainer from '@root/client/components/header/search/SearchContainer'
+import Search from '@root/client/components/header/search/Search'
 import headerPicture from '@root/client/images/headerPicture.jpg';
+import cn from 'classnames';
+import './Header.module.css';
 
+export class Header extends React.Component {
 
-export const Header = (props) => {
-  return (
-    <div className={styles.header}>
-
-    <div className = {styles.background}>
-      <img src ={headerPicture} alt = "background image" />
-    </div>
-
-      <label className={styles.netflixRoulette}>
-        NETFLIXROULETTE
-      </label>
-      <label className={styles.findYourMovie}>
-        FIND YOUR MOVIE
-      </label>
-      <SearchContainer />
-    </div>
-  )
+  render() {
+    return (
+      <div className="header">
+        <div className="header-netflixroulette">
+          <span>NETFLIX</span>ROULETTE
+        </div>
+        <div className="header-find-your-movie">
+          FIND YOUR MOVIE
+        </div>
+        <Search />
+      </div>
+    )
+  }
 }
+

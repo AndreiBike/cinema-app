@@ -1,4 +1,7 @@
 .movies {
+  background-color: #232323;
+  width: 1200px;
+  box-sizing: border-box;
   padding-top: 36px;
   padding-bottom: 72px;
   padding-left: 60px;
@@ -8,7 +11,8 @@
   grid-column-gap: 56px;
 }
 
-.emptyMovies {
+.empty-movies {
+  background-color: #232323;
   width: 1200px;
   height: 561px;
   display: flex;
@@ -16,12 +20,12 @@
   justify-content: center;
 }
 
-.emptyMovies span {
+.empty-movies span {
   height: 63px;
   width: 389px;
   opacity: 0.8;
   color: white;
-  font-family: "Monserrat" sans-serif;
+  font-family: Montserrat;
   font-size: 52px;
   letter-spacing: 0;
   line-height: 63px;

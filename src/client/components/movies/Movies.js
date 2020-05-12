@@ -1,30 +1,66 @@
 import React from 'react';
-import styles from './Movies.module.css';
-import MovieContainer from './Movie/MovieContainer';
+import { getAllMovies } from '@root/client/store/store';
+import Movie from '@root/client/components/movies/Movie/Movie'
+import './Movies.module.css'
+import Preloader from '../shared/preloader/Preloader';
 
+class Movies extends React.Component {
 
-const Movies = (props) => {
-
-  if (props.movies.length === 0) {
-    return (
-      <div className={styles.emptyMovies}>
-        <span>No films found </span>
-      </div>
-    )
+  constructor() {
+    super();
+    this.isUnmount = false;
+    this.isLoading = true;
+    this.state = {
+      movies: [],
+    }
   }
-  else {
 
-    let moviesList = props.movies.map((movie)=> {
+  componentDidMount() {
+    this.isLoading = true;
+    getAllMovies().then((mov) => {
+      if (this.isUnmount === false) {
+        this.setState({ movies: [...mov] });
+      }
+    });
+    this.isLoading = false;
+  }
+
+  componentWillUnmount() {
+    this.isUnmount = true;
+  }
+
+  render() {
+
+    if (this.state.movies.length === 0) {
+      if (this.isLoading === true) {
+        return (
+          <div className ="empty-movies">
+            <Preloader />
+          </div>
+        )
+      } else {
+        return (
+          <div className="empty-movies">
+            <span>No films found </span>
+          </div>
+        )
+      }
+    }
+    else {
+
+      let moviesList = this.state.movies.map((movie) => {
+        return (
+          <Movie key={movie.id} movie={movie} />
+        )
+      })
+
       return (
-        <MovieContainer key = {movie.id} movie= {movie} />
+        <div className="movies">
+          {moviesList}
+        </div>
       )
-    })
+    }
 
-    return (
-      <div className={styles.movies}>
-        {moviesList}
-      </div>
-    )
   }
 }
 

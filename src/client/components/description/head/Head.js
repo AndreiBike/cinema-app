@@ -1,14 +1,14 @@
 import React from 'react';
 import searchIcon from '@root/client/images/search.png';
-import styles from './Head.module.css';
+import './Head.module.css';
 
 const Head = (props) => {
   return (
-    <div className={styles.head}>
-      <label className={styles.netflixRoulette}>
+    <div className="head">
+      <label className="head-netflix-roulette">
         NETFLIXROULETTE
         </label>
-      <div className={styles.searchIcon}>
+      <div className="head-search-icon">
         <img src={searchIcon} />
       </div>
     </div>

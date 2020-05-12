@@ -8,7 +8,7 @@
   font-family: Montserrat;
 }
 
-.label {
+.sortbar label {
   margin-right: 20px;
   opacity: 0.8;
   color: #FFFFFF;
@@ -18,17 +18,16 @@
   line-height: 19px;
 }
 
-.ratingButton{
-  margin-right: 120px;
-  height: 35px;
-  width: 99px;
-  border-radius: 0 4px 4px 0;
-  border: none;
- /* background-color: #424242;*/
+.release-button{
   padding: 0;
+  height: 35px;
+  width: 155px;
+  border-radius: 4px 0 0 4px;
+  border: none;
+  background-color: #424242;
 }
 
-.releaseButton span {
+.release-button span {
   color: #FFFFFF;
   height: 19px;
   width: 59px;
@@ -39,7 +38,17 @@
   text-align: center;
 }
 
-.ratingButton span {
+.rating-button{
+  margin-right: 120px;
+  height: 35px;
+  width: 99px;
+  border-radius: 0 4px 4px 0;
+  border: none;
+  padding: 0;
+  background-color: #424242;
+}
+
+.rating-button span {
   color: #FFFFFF;
   height: 19px;
   width: 115px;
@@ -50,11 +59,16 @@
   text-align: center;
 }
 
-.releaseButton{
-  padding: 0;
-  height: 35px;
-  width: 155px;
-  border-radius: 4px 0 0 4px;
-  border: none;
-  /*background-color: #F65261;*/
+.active{
+  background-color: #F65261;
+}
+
+.sortbar-same-gengre{
+  margin-right: 894px;
+  color: #FFFFFF;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 19px;
 }

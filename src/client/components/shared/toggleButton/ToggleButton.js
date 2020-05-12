@@ -2,14 +2,25 @@ import React from 'react';
 
 const ToggleButton = (props) => {
 
+  const {
+    toggleClassName,
+    toggleOnClick,
+    toggleText
+  } = props;
 
   return (
-  <button>
-    <span>
-      {}
-    </span>
-  </button>
+    <button
+      className={toggleClassName}
+      onClick={toggleOnClick}>
+      <span>
+        {toggleText}
+      </span>
+    </button>
   )
 }
 
-export default ToggleButton
+ToggleButton.propTypes = {
+
+}
+
+export default ToggleButton;

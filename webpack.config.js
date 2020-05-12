@@ -15,7 +15,9 @@ module.exports = function (webpackEnv) {
       filename: "./main.js"
     },
     plugins: [
+      //Plugin for HTML webpack;
       new HtmlWebpackPlugin({ template: './template/index.html' }),
+      //Plugin for copying images;
       new CopyPlugin([{
         from: path.join(__dirname, "/src/client/images"),
         to: 'assets'
@@ -31,7 +33,6 @@ module.exports = function (webpackEnv) {
       progress: true
 
     } : undefined,
-
     devtool: isEnvDevelopment ? 'source-map' : undefined,
 
     //Setting the modules and rules for modules

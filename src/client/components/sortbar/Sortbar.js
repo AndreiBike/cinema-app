@@ -1,40 +1,79 @@
 import React from 'react';
-import styles from './Sortbar.module.css';
+import cn from 'classnames';
+import ToggleButton from '../shared/toggleButton/ToggleButton';
+import { useState } from 'react';
+import './Sortbar.module.css';
 
-const activeStyle = {
-  backgroundColor: "#F65261"
-}
-
-const passiveStyle = {
-  backgroundColor: "#424242"
-}
 
 const Sortbar = (props) => {
-  return (
-    <div className={styles.sortbar}>
-      <label className={styles.label}>
-        SORT BY
+
+  function clickRating(prevState) {
+    let updState = JSON.parse(JSON.stringify(prevState));
+    updState.sortByRating.status = true;
+    updState.sortByReleaseDate.status = false;
+    setState(updState);
+  }
+
+  function clickReleaseDate(prevState) {
+    let updState = JSON.parse(JSON.stringify(prevState));
+    updState.sortByRating.status = false;
+    updState.sortByReleaseDate.status = true;
+    setState(updState);
+  }
+
+  let initialState = {
+    sortMode: true,
+    sortByReleaseDate: {
+      label: "RELEASE DATE",
+      status: true,
+    },
+    sortByRating: {
+      label: "RATING",
+      status: false,
+    },
+  }
+
+  const [state, setState] = useState(initialState);
+
+  let releaseClass = cn({
+    "release-button": true,
+    "active": state.sortByReleaseDate.status,
+  });
+
+  let ratingClass = cn({
+    "rating-button": true,
+    "active": state.sortByRating.status,
+  })
+
+
+  if (state.sortMode) {
+    return (
+      <div className="sortbar">
+        <label>
+          SORT BY
       </label>
-      <button
-        className={styles.releaseButton}
-        style={props.sortByReleaseDate.status ? activeStyle : passiveStyle}
-        onClick={props.clickReleaseDate}
-      >
-        <span>
-          {props.sortByReleaseDate.label}
-        </span>
-      </button>
 
-      <button className={styles.ratingButton}
-        style={props.sortByRating.status ? activeStyle : passiveStyle}
-        onClick={props.clickRating}>
-        <span>
-          {props.sortByRating.label}
-        </span>
-      </button>
+        <ToggleButton toggleClassName={releaseClass}
+          toggleOnClick={() => { clickReleaseDate(state) }}
+          toggleText={state.sortByReleaseDate.label}
+        />
 
-    </div>
-  )
+        <ToggleButton toggleClassName={ratingClass}
+          toggleOnClick={() => { clickRating(state) }}
+          toggleText={state.sortByRating.label}
+        />
+
+      </div>
+    )
+  } else {
+    return(
+      <div className = "sortbar">
+        <div className = "sortbar-same-gengre">
+          Films by Drama gengre
+        </div>
+      </div>
+    )
+  }
 }
 
 export default Sortbar;
