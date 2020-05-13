@@ -37,11 +37,3 @@ class Movie extends React.Component {
 }
 
 export default Movie;
-
-/*
-<Movie id = {this.state.id}
-imageWay = {this.state.imageWay}
-name = {this.state.name}
-year = {this.state.year}
-gengre = {this.state.gengre}
-*/

@@ -3,6 +3,7 @@ import Head from './head/Head'
 import Specification from './specification/Specification'
 import './Description.module.css'
 import { getMovieById } from "@root/client/store/store"
+import Preloader from '@root/client/components/shared/preloader/Preloader';
 
 class Description extends React.Component {
 

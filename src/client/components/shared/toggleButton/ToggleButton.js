@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ToggleButton = (props) => {
 
@@ -20,7 +21,9 @@ const ToggleButton = (props) => {
 }
 
 ToggleButton.propTypes = {
-
+  toggleClassName: PropTypes.string,
+  toggleOnClick: PropTypes.func,
+  toggleText: PropTypes.string,
 }
 
 export default ToggleButton;

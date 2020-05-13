@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './Specification.module.css';
+import PropTypes from 'prop-types';
+import './Specification.module.css';
 
 const Specification = (props) => {
 
   const {
     movie: {
-      id,
       name,
       rating,
       gengre,
@@ -40,6 +40,16 @@ const Specification = (props) => {
       </div>
     </div>
   )
+}
+
+Specification.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  rating: PropTypes.number,
+  gengre: PropTypes.string,
+  year: PropTypes.number,
+  duration: PropTypes.number,
+  description: PropTypes.string,
 }
 
 export default Specification;
