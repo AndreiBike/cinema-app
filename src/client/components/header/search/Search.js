@@ -1,53 +1,77 @@
 import React from 'react';
-import styles from './Search.module.css';
-import PropTypes from 'prop-types';
+import './Search.module.css';
+import cn from 'classnames';
+import ToggleButton from '../../shared/toggleButton/ToggleButton';
 
-const activeStyle = {
-  backgroundColor: "#F65261"
-}
+class Search extends React.Component {
 
-const passiveStyle = {
-  backgroundColor: "rgba(66,66,66,0.68)"
-}
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchByTitle: {
+        label: "TITLE",
+        status: true,
+      },
+      searchByGengre: {
+        label: "GENGRE",
+        status: false,
+      }
+    }
+  }
 
+  clickTitle() {
+    this.setState((prevState) => {
+      let updState = JSON.parse(JSON.stringify(prevState));
+      updState.searchByTitle.status = true;
+      updState.searchByGengre.status = false;
+      return updState;
+    });
+  }
 
-const Search = (props) => {
-  return (
-    <div className={styles.search}>
-      <div className={styles.searchInput}>
-        <input type="search" placeholder="Search" />
-        <button> SEARCH </button>
+  clickGengre() {
+    this.setState((prevState) => {
+      let updState = JSON.parse(JSON.stringify(prevState));
+      updState.searchByTitle.status = false;
+      updState.searchByGengre.status = true;
+      return updState;
+    }
+    );
+  }
+
+  render() {
+
+    let titleClass = cn({
+      'title-button': true,
+      'active': this.state.searchByTitle.status,
+    });
+
+    let gengreClass = cn({
+      'gengre-button': true,
+      'active': this.state.searchByGengre.status,
+    })
+
+    return (
+      <div className="search">
+        <div className="search-input">
+          <input type="search" placeholder="Search" />
+          <button> SEARCH </button>
+        </div>
+
+        <div className="search-choise">
+          <label>SEARCH BY</label>
+
+          <ToggleButton toggleClassName={titleClass}
+            toggleOnClick={() => this.clickTitle()}
+            toggleText={this.state.searchByTitle.label}
+          />
+
+          <ToggleButton toggleClassName={gengreClass}
+            toggleOnClick={() => this.clickGengre()}
+            toggleText={this.state.searchByGengre.label}
+          />
+        </div>
       </div>
-
-      <div className={styles.searchChoise}>
-        <label>SEARCH BY</label>
-        <button
-          className={`${styles.titleButton}${ props.searchByTitle.status ? 'activeStyle' : 'passiveStyle' }`}
-          onClick = {props.clickTitle}
-        >
-          {props.searchByTitle.label}
-        </button>
-        <button
-          className={styles.gengreButton}
-          style={props.searchByGengre.status ? activeStyle : passiveStyle}
-          onClick = {props.clickGengre}
-        >
-          {props.searchByGengre.label}
-        </button>
-      </div>
-    </div>
-  )
-}
-
-Search.propTypes = {
-  searchByGengre: PropTypes.shape({
-    status: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
-  })
-}
-
-Search.defaultProps = {
-  searchByGengre: {
-    status: true
+    )
   }
 }
 

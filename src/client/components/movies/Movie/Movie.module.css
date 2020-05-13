@@ -4,36 +4,36 @@
   margin-top: 36px;
 }
 
-.poster {
+.movie-poster {
   height: 455px;
   width: 324px;
   background-color: silver;
 }
 
-.poster img{
+.movie-poster img{
   height: 100%;
   width: 100%;
 }
 
-.filmName{
+.movie-filmname{
   margin-top: 22px;
   display: flex;
   justify-content: space-between;
 }
 
-.filmName div:first-child {
+.movie-filmname div:first-child {
   height: 22px;
   width: 232px;
   opacity: 0.7;
   color: white;
-  font-family: 'Monserrat';
+  font-family: Montserrat;
   font-size: 18px;
   font-weight: 500;
   letter-spacing: 0;
   line-height: 22px;
 }
 
-.filmName div:last-child {
+.movie-filmname div:last-child {
   color: white;
   border: 1px solid #979797;
   width: 66px;
@@ -49,13 +49,13 @@
   letter-spacing: 0;
 }
 
-.gengre {
+.movie-gengre {
   margin-top: 8px;
   height: 18px;
   width: 323px;
   opacity: 0.5;
   color: white;
-  font-family: 'Monserrat';
+  font-family: Montserrat;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0;

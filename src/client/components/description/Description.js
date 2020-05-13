@@ -1,22 +1,50 @@
 import React from 'react';
-import headerPicture from '@root/client/images/headerPicture.jpg'
-import Head from './head/head';
-import Container from './container/Container';
-import styles from './Description.module.css';
-import cn from 'classnames';
+import Head from './head/Head'
+import Specification from './specification/Specification'
+import './Description.module.css'
+import { getMovieById } from "@root/client/store/store"
+import Preloader from '@root/client/components/shared/preloader/Preloader';
 
-import './Description.module.css';
+class Description extends React.Component {
 
-const Description = (props) => {
-  return (
-    <div className="description">
-      <div className="description-background">
-        <img src="./assets/headerPicture.jpg" alt="background image" />
+  constructor(props) {
+    super(props);
+    this.isUnmount = false;
+    this.state = {
+      movie: {
+        id: 1,
+        name: "Avengers infinity war",
+        rating: 4.3,
+        gengre: "Action & Adventure",
+        year: 1994,
+        duration: 154,
+        description: "Pulp Fiction is a 1994 American crime film written and directed by Quentin Tarantino; it is based on a story by Tarantino and Roger Avary.[4] Starring John Travolta, Samuel L. Jackson, Bruce Willis, Tim Roth, Ving Rhames, and Uma Thurman, it tells several stories of criminal Los Angeles. The film's title refers to the pulp magazines and hardboiled crime novels popular during the mid-20th century, known for their graphic violence and punchy dialogue."
+      }
+    }
+  }
+
+  componentDidMount() {
+    getMovieById(2).then((mov) => {
+      if (this.isUnmount === false) {
+        this.setState({
+          movie: mov
+        })
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this.isUnmount = true;
+  }
+
+  render() {
+    return (
+      <div className="description">
+        <Head />
+        <Specification movie={this.state.movie} />
       </div>
-      <Head />
-      <Container movie = {props.movie}/>
-    </div>
-  )
-} 
+    )
+  }
+}
 
 export default Description;

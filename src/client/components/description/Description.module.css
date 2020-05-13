@@ -1,19 +1,8 @@
 .description {
   color: white;
   background-color: black;
-}
-
-.description-background {
   width: 1200px;
   height: 546px;
-  position: absolute;
-}
-
-.description-background img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.5;
-  filter: blur(5px);
+  background-image: url(https://avatars.mds.yandex.net/get-pdb/1792436/ad89a1a5-b947-49f3-987c-af320848bbb0/s1200);
 }
 
