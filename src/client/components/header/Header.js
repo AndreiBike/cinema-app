@@ -1,19 +1,27 @@
 import React from 'react';
 import Search from '@root/client/components/header/search/Search'
-import headerPicture from '@root/client/images/headerPicture.jpg';
-import cn from 'classnames';
 import './Header.module.css';
 
 export class Header extends React.Component {
 
+  constructor(props){
+    super(props);
+  }
+
   render() {
+    const {
+      headerLabels: {
+        netflixRoulette,
+        findYourMovie,
+      }
+    } = this.props;
     return (
       <div className="header">
-        <div className="header-netflixroulette">
-          <span>NETFLIX</span>ROULETTE
-        </div>
+        <p className="header-netflixroulette">
+          <span className="header-netflixroulette-bold">{netflixRoulette[0]}</span>{netflixRoulette[1]}
+        </p>
         <div className="header-find-your-movie">
-          FIND YOUR MOVIE
+          {findYourMovie}
         </div>
         <Search />
       </div>

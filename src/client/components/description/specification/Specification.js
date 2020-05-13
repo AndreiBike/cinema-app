@@ -32,11 +32,9 @@ const Specification = (props) => {
           <span className="specification-beautify"> {year} </span> year
           <span className="specification-beautify"> {duration} </span> min
         </div>
-        <div className="specification-text">
-          <p>
-            {description}
-          </p>
-        </div>
+        <p className="specification-text">
+          {description}
+        </p>
       </div>
     </div>
   )

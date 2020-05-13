@@ -16,7 +16,6 @@ class Movie extends React.Component {
 
   render() {
     return (
-      <>
         <div className="movie">
           <div className="movie-poster">
             <img src={this.state.imageWay} />
@@ -31,7 +30,6 @@ class Movie extends React.Component {
             {this.state.gengre}
           </div>
         </div>
-      </>
     )
   }
 }

@@ -15,9 +15,10 @@
   font-weight: 500;
   letter-spacing: 0;
   line-height: 24px;
+  margin: 0;
 }
 
-.header-netflixroulette span{
+.header-netflixroulette-bold{
   font-weight: 700;
 }
 
@@ -46,21 +47,6 @@
   height: 100%;
   opacity: 0.3;
   filter: blur(5px);
-}
-
-.netflixRoulette label{
-  position: absolute;
-  top: 20px;
-  left: 60px; 
-  color: #f65261;
-  height: 24px;
-  width: 151px;
-  font-family: Montserrat;
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 24px;
-  z-index: 100;
 }
 
 .findYourMovie {

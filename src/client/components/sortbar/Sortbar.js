@@ -1,24 +1,28 @@
 import React from 'react';
-import cn from 'classnames';
-import ToggleButton from '../shared/toggleButton/ToggleButton';
 import { useState } from 'react';
+import cn from 'classnames';
+import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
 import './Sortbar.module.css';
 
 
 const Sortbar = (props) => {
 
   function clickRating(prevState) {
-    let updState = JSON.parse(JSON.stringify(prevState));
-    updState.sortByRating.status = true;
-    updState.sortByReleaseDate.status = false;
-    setState(updState);
+    const { sortMode, sortByRating, sortByReleaseDate } = prevState;
+    setState({
+      sortMode,
+      sortByRating: { ...sortByRating, status: true },
+      sortByReleaseDate: { ...sortByReleaseDate, status: false }
+    });
   }
 
   function clickReleaseDate(prevState) {
-    let updState = JSON.parse(JSON.stringify(prevState));
-    updState.sortByRating.status = false;
-    updState.sortByReleaseDate.status = true;
-    setState(updState);
+    const { sortMode, sortByRating, sortByReleaseDate } = prevState;
+    setState({
+      sortMode,
+      sortByRating: { ...sortByRating, status: false },
+      sortByReleaseDate: { ...sortByReleaseDate, status: true }
+    });
   }
 
   let initialState = {
@@ -66,9 +70,9 @@ const Sortbar = (props) => {
       </div>
     )
   } else {
-    return(
-      <div className = "sortbar">
-        <div className = "sortbar-same-gengre">
+    return (
+      <div className="sortbar">
+        <div className="sortbar-same-gengre">
           Films by Drama gengre
         </div>
       </div>

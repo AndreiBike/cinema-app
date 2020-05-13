@@ -1,9 +1,9 @@
 import React from 'react';
+import { getMovieById } from "@root/client/store/store"
 import Head from './head/Head'
 import Specification from './specification/Specification'
 import './Description.module.css'
-import { getMovieById } from "@root/client/store/store"
-import Preloader from '@root/client/components/shared/preloader/Preloader';
+
 
 class Description extends React.Component {
 
@@ -40,7 +40,7 @@ class Description extends React.Component {
   render() {
     return (
       <div className="description">
-        <Head />
+        <Head headerLabels={this.props.headerLabels}/>
         <Specification movie={this.state.movie} />
       </div>
     )

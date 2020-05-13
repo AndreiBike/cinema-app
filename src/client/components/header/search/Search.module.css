@@ -8,7 +8,7 @@
   padding-top:38px
 }
 
-.search-input input {
+.search-input-field {
   margin-left: 120px;
   height: 57px;
   width: 713px;
@@ -27,7 +27,7 @@
   line-height: 24px;
 }
 
-.search-input button{
+.search-input-button{
   padding:0;
   margin-left: 14px;
   height: 57px;
@@ -52,7 +52,7 @@
   justify-content: start;
 }
 
-.search-choise label{
+.search-by-label{
   margin-left:123px;
   padding-right: 20px;
   opacity: 0.8;
