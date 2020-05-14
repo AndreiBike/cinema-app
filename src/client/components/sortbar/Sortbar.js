@@ -48,7 +48,10 @@ const Sortbar = (props) => {
     "rating-button": true,
     "active": state.sortByRating.status,
   })
-
+  
+  /*
+  * if (state.sortMode) { return () }; return ()
+  */
 
   if (state.sortMode) {
     return (
