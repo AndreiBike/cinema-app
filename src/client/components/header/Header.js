@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from '@root/client/components/header/search/Search'
 import './Header.module.css';
-
+// functional component
 export class Header extends React.Component {
 
   constructor(props){
