@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Movie.module.css"
-
+// functional component
 class Movie extends React.Component {
 
   constructor(props) {
