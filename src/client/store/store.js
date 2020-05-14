@@ -84,7 +84,8 @@ export function getAllMovies() {
 export function getMovieById(id) {
   return new Promise((resolve, reject) => {
     if (data.movies.length > 0) {
-      for (let i = 0; i < data.movies.length; i++) {
+//  TODO use find instead of for       
+for (let i = 0; i < data.movies.length; i++) {
         if (data.movies[i].id === id) {
           setTimeout(() => {
             resolve(data.movies[i]);
