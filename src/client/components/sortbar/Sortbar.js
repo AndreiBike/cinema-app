@@ -24,7 +24,7 @@ const Sortbar = (props) => {
       sortByReleaseDate: { ...sortByReleaseDate, status: true }
     });
   }
-
+// move state at the top of function
   let initialState = {
     sortMode: true,
     sortByReleaseDate: {
