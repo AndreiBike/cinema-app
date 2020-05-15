@@ -1,0 +1,6 @@
+.error-boundary{
+  width: 1200px;
+  background-color: gray;
+  position:absolute;
+  padding: 20px;
+}

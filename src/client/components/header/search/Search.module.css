@@ -1,0 +1,100 @@
+.search {
+  display: block;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  padding-top:38px
+}
+
+.search-input-field {
+  margin-left: 120px;
+  height: 57px;
+  width: 713px;
+  opacity: 0.7;
+  border-radius: 4px;
+  background-color: rgba(50, 50,50, 0.8);
+  box-shadow: 0 4px 0 0 rgba(246,82,97,0.65);
+  border: none;
+  color: white;
+  padding-left: 19px;
+  padding-top: 17px;
+  padding-bottom: 16px;
+  font-family: Montserrat;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.search-input-button{
+  padding:0;
+  margin-left: 14px;
+  height: 57px;
+  width: 233px;
+  border-radius: 4px;
+  border: none;
+  background-color: #F65261;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 24px;
+  text-align: center;
+  font-family: Montserrat;
+}
+
+.search-choise{
+  color: white;
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.search-by-label{
+  margin-left:123px;
+  padding-right: 20px;
+  opacity: 0.8;
+  color: white;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.89px;
+  line-height: 19px;
+}
+
+.title-button{
+  border: none;
+  padding: 0;
+  height: 35px;
+  width: 81px;
+  border-radius: 4px 0 0 4px;
+  background-color: rgba(66,66,66,0.68);
+  color: white;
+  font-family: Montserrat;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+}
+
+.gengre-button{
+  border: none;
+  padding: 0;
+  border-radius: 0 4px 4px 0;
+  height: 35px;
+  width: 107px;
+  border-radius: 0 4px 4px 0;
+  background-color: rgba(66,66,66,0.68);
+  color: white;
+  font-family: Montserrat;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 19px;
+  text-align: center;
+}
+
+.active{
+  background-color: #F65261;
+}

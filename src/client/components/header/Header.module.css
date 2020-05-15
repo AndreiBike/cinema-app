@@ -1,0 +1,64 @@
+.header{
+  display: block;
+  width: 1200px;
+  height: 396px; 
+  background-image: url(https://avatars.mds.yandex.net/get-pdb/1792436/ad89a1a5-b947-49f3-987c-af320848bbb0/s1200);
+ /* background-image: url(../../images/headerPicture.jpg);*/
+}
+
+.header-netflixroulette{
+  font-family: Montserrat;
+  color: #f65261;
+  padding-top: 20px;
+  padding-left: 60px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin: 0;
+}
+
+.header-netflixroulette-bold{
+  font-weight: 700;
+}
+
+.header-find-your-movie{
+  padding-top: 57px;
+  padding-left: 120px;
+  color: white;
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 49px;
+}
+
+.background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1200px;
+  height: 396px;
+}
+
+.background img{
+  object-fit: cover;
+  width: 1200px;
+  height: 100%;
+  opacity: 0.3;
+  filter: blur(5px);
+}
+
+.findYourMovie {
+  position: absolute;
+  left: 120px;
+  top: 101px;
+  color: white;
+  height: 49px;
+  width: 393px;
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  z-index: 100;
+}

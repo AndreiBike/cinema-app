@@ -1,0 +1,74 @@
+.sortbar{
+  width: 1200px;
+  height: 70px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #555555;
+  font-family: Montserrat;
+}
+
+.sortbar label {
+  margin-right: 20px;
+  opacity: 0.8;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.89px;
+  line-height: 19px;
+}
+
+.release-button{
+  padding: 0;
+  height: 35px;
+  width: 155px;
+  border-radius: 4px 0 0 4px;
+  border: none;
+  background-color: #424242;
+}
+
+.release-button span {
+  color: #FFFFFF;
+  height: 19px;
+  width: 59px;
+  font-family: Montserrat;
+  font-size: 15px;
+  letter-spacing: 0px;
+  line-height: 19px;
+  text-align: center;
+}
+
+.rating-button{
+  margin-right: 120px;
+  height: 35px;
+  width: 99px;
+  border-radius: 0 4px 4px 0;
+  border: none;
+  padding: 0;
+  background-color: #424242;
+}
+
+.rating-button span {
+  color: #FFFFFF;
+  height: 19px;
+  width: 115px;
+  font-family: Montserrat;
+  font-size: 15px;
+  letter-spacing: 0px;
+  line-height: 19px;
+  text-align: center;
+}
+
+.active{
+  background-color: #F65261;
+}
+
+.sortbar-same-gengre{
+  margin-right: 894px;
+  color: #FFFFFF;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 19px;
+}
