@@ -7,24 +7,6 @@ import './Sortbar.module.css';
 
 const Sortbar = (props) => {
 
-  function clickRating(prevState) {
-    const { sortMode, sortByRating, sortByReleaseDate } = prevState;
-    setState({
-      sortMode,
-      sortByRating: { ...sortByRating, status: true },
-      sortByReleaseDate: { ...sortByReleaseDate, status: false }
-    });
-  }
-
-  function clickReleaseDate(prevState) {
-    const { sortMode, sortByRating, sortByReleaseDate } = prevState;
-    setState({
-      sortMode,
-      sortByRating: { ...sortByRating, status: false },
-      sortByReleaseDate: { ...sortByReleaseDate, status: true }
-    });
-  }
-// move state at the top of function
   let initialState = {
     sortMode: true,
     sortByReleaseDate: {
@@ -39,6 +21,15 @@ const Sortbar = (props) => {
 
   const [state, setState] = useState(initialState);
 
+  const clickButton = (prevState, isRatingStatus) => {
+    const { sortMode, sortByRating, sortByReleaseDate } = prevState;
+    setState({
+      sortMode,
+      sortByRating: { ...sortByRating, status: isRatingStatus },
+      sortByReleaseDate: { ...sortByReleaseDate, status: !isRatingStatus }
+    });
+  }
+
   let releaseClass = cn({
     "release-button": true,
     "active": state.sortByReleaseDate.status,
@@ -48,10 +39,6 @@ const Sortbar = (props) => {
     "rating-button": true,
     "active": state.sortByRating.status,
   })
-  
-  /*
-  * if (state.sortMode) { return () }; return ()
-  */
 
   if (state.sortMode) {
     return (
@@ -61,26 +48,27 @@ const Sortbar = (props) => {
       </label>
 
         <ToggleButton toggleClassName={releaseClass}
-          toggleOnClick={() => { clickReleaseDate(state) }}
+          toggleOnClick={() => { clickButton(state, false) }}
           toggleText={state.sortByReleaseDate.label}
         />
 
         <ToggleButton toggleClassName={ratingClass}
-          toggleOnClick={() => { clickRating(state) }}
+          toggleOnClick={() => { clickButton(state, true) }}
           toggleText={state.sortByRating.label}
         />
 
       </div>
     )
-  } else {
-    return (
-      <div className="sortbar">
-        <div className="sortbar-same-gengre">
-          Films by Drama gengre
-        </div>
-      </div>
-    )
   }
+
+  return (
+    <div className="sortbar">
+      <div className="sortbar-same-gengre">
+        Films by Drama gengre
+        </div>
+    </div>
+  )
+
 }
 
 export default Sortbar;

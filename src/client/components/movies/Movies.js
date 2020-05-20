@@ -17,10 +17,10 @@ class Movies extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     getAllMovies().then((mov) => {
       if (this.isUnmount === false) {
-        this.setState({isLoading: false, movies: [...mov] });
+        this.setState({ isLoading: false, movies: [...mov] });
       }
     });
   }
@@ -45,13 +45,13 @@ class Movies extends React.Component {
           {moviesList}
         </div>
       )
-    } else {
-      return (
-        <div className="empty-movies">
-          <span>No films found </span>
-        </div>
-      )
     }
+    return (
+      <div className="empty-movies">
+        <span>No films found </span>
+      </div>
+    )
+
   }
 }
 

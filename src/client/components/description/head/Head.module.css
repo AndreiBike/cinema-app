@@ -1,3 +1,12 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 20px;
+  padding-left: 60px;
+  padding-right: 38px;
+}
+
 .head-netflix-roulette{
   height: 24px;
   width: 151px;
@@ -12,15 +21,6 @@
 
 .head-netflix-roulette-bold{
   font-weight: 700;
-}
-
-.head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-top: 20px;
-  padding-left: 60px;
-  padding-right: 38px;
 }
 
 .head-search-icon {

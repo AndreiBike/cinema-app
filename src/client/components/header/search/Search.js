@@ -17,29 +17,16 @@ class Search extends React.Component {
         status: false,
       }
     }
-    this.clickGengre = this.clickGengre.bind(this);
-    this.clickTitle = this.clickTitle.bind(this);
-  }
 
-  clickTitle() {
-    this.setState((prevState) => {
-      const { searchByTitle, searchByGengre } = prevState;
-      return {
-        searchByTitle: { ...searchByTitle, status: true },
-        searchByGengre: { ...searchByGengre, status: false }
-      }
-    });
-  }
-
-  clickGengre() {
-    this.setState((prevState) => {
-      const { searchByTitle, searchByGengre } = prevState;
-      return {
-        searchByTitle: { ...searchByTitle, status: false },
-        searchByGengre: { ...searchByGengre, status: true }
-      }
+    this.clickButton = (isTitleStatus) => {
+      this.setState((prevState) => {
+        const { searchByTitle, searchByGengre } = prevState;
+        return {
+          searchByTitle: { ...searchByTitle, status: isTitleStatus },
+          searchByGengre: { ...searchByGengre, status: !isTitleStatus }
+        }
+      })
     }
-    );
   }
 
   render() {
@@ -57,20 +44,20 @@ class Search extends React.Component {
     return (
       <div className="search">
         <div className="search-input">
-          <input className = "search-input-field" type="search" placeholder="Search" />
-          <button className = "search-input-button"> SEARCH </button>
+          <input className="search-input-field" type="search" placeholder="Search" />
+          <button className="search-input-button"> SEARCH </button>
         </div>
 
         <div className="search-choise">
           <label className="search-by-label">SEARCH BY</label>
 
           <ToggleButton toggleClassName={titleClass}
-            toggleOnClick={this.clickTitle}
+            toggleOnClick={() => { this.clickButton(true) }}
             toggleText={this.state.searchByTitle.label}
           />
 
           <ToggleButton toggleClassName={gengreClass}
-            toggleOnClick={this.clickGengre}
+            toggleOnClick={() => { this.clickButton(false) }}
             toggleText={this.state.searchByGengre.label}
           />
         </div>
