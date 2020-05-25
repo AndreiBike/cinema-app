@@ -11,7 +11,7 @@ const Footer = (props) => {
 
   return (
     <div className="footer">
-      <span className="footer-bold-text">{netflixRoulette[0]}</span>{netflixRoulette[1]}
+      <span className="footer-bold-text">{netflixRoulette[0]}</span>{netflixRoulette[1]} 
     </div>
   )
 }

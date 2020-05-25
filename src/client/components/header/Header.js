@@ -1,8 +1,9 @@
 import React from 'react';
-import Search from '@root/client/components/header/search/Search'
+import PropTypes from 'prop-types';
+import Search from '@root/client/components/header/search/Search';
 import './Header.module.css';
 
-export const Header = (props) => {
+const Header = (props) => {
 
   const {
     headerLabels: {
@@ -23,3 +24,16 @@ export const Header = (props) => {
     </div>
   );
 }
+
+Header.propTypes = {
+  headerLabels: PropTypes.object,
+}
+
+Header.defaultProps = {
+  headerLabels: {
+    netflixRoulette: ["netflix","roulette"],
+    findYourMovie: "find your movie",
+  }
+}
+
+export default Header;

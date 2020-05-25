@@ -3,12 +3,15 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
+
 module.exports = function (webpackEnv) {
+  
   const isEnvDevelopment = process.env.NODE_ENV === 'development';
 
   return {
     //Setting the environment
     entry: "./src/index.js", //entry point
+    target: 'node',
     mode: isEnvDevelopment ? 'development' : 'production',
     output: {// output point
       path: path.join(__dirname, "/dist"),

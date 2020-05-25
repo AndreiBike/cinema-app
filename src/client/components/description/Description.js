@@ -14,6 +14,7 @@ class Description extends React.Component {
       movie: {
         id: 1,
         name: "Avengers infinity war",
+        imageWay: './assets/poster.jpg',
         rating: 4.3,
         gengre: "Action & Adventure",
         year: 1994,

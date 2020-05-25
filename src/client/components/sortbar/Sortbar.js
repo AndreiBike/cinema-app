@@ -68,7 +68,6 @@ const Sortbar = (props) => {
         </div>
     </div>
   )
-
 }
 
 export default Sortbar;
