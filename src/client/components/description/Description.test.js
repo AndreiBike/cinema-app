@@ -2,18 +2,23 @@ import React from 'react';
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Description from './Description';
+import {unmountComponentAtNode} from 'react-dom';
 
 configure({ adapter: new Adapter() });
 
 describe("<Description /> component testing", () => {
 
-  it.skip("test #1 should call componentDidMount once", () => {
-    let componentDidMountSpy = spyOn(Description.prototype, 'componentDidMount');
-    const component = shallow(<Description />);
-    expect(componentDidMountSpy).toHaveBeenCalledTimes(1);
+  let component = null;
+
+  beforeEach(()=>{
+    component = mount(<Description />);
+    
   });
 
-  
+  it("test #1 should call componentDidMount once", () => {
+    let componentDidMountSpy = spyOn(Description.prototype, 'componentDidMount');
+    expect(componentDidMountSpy).toHaveBeenCalledTimes(1);
+  });
 
   it("test #2 should populate the state", async () => {
     const component = await mount(<Description />);
