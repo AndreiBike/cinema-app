@@ -1,4 +1,4 @@
-const data =
+export const data =
 {
   movies: [
     {
@@ -84,15 +84,17 @@ export function getAllMovies() {
 export function getMovieById(id) {
   return new Promise((resolve, reject) => {
     if (data.movies.length > 0) {
-      for (let i = 0; i < data.movies.length; i++) {
-        if (data.movies[i].id === id) {
-          setTimeout(() => {
-            resolve(data.movies[i]);
-          }, 3000)
-        }
-      }
+      setTimeout(() => {
+        resolve(data.movies.find((movie) => {
+          if (movie.id === id) {
+            return true;
+          }
+          return false;
+        }))
+      } , 3000)
     } else {
       reject("Array is empty");
     }
-  })
+  }
+  )
 }

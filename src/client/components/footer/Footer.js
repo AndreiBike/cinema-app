@@ -2,9 +2,16 @@ import React from 'react';
 import './Footer.module.css';
 
 const Footer = (props) => {
+
+  const {
+    footerLabels:{
+      netflixRoulette,
+    }
+  } = props;
+
   return (
     <div className="footer">
-      <span>NETFLIX</span>ROULETTE
+      <span className="footer-bold-text">{netflixRoulette[0]}</span>{netflixRoulette[1]} 
     </div>
   )
 }

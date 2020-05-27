@@ -1,6 +1,7 @@
 # dependencies
 /node_modules
 /dist
+/coverage
 /.pnp
 .pnp.js
 .idea/

@@ -1,7 +1,7 @@
 import React from 'react';
-import './Search.module.css';
 import cn from 'classnames';
-import ToggleButton from '../../shared/toggleButton/ToggleButton';
+import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
+import './Search.module.css';
 
 class Search extends React.Component {
 
@@ -17,25 +17,16 @@ class Search extends React.Component {
         status: false,
       }
     }
-  }
 
-  clickTitle() {
-    this.setState((prevState) => {
-      let updState = JSON.parse(JSON.stringify(prevState));
-      updState.searchByTitle.status = true;
-      updState.searchByGengre.status = false;
-      return updState;
-    });
-  }
-
-  clickGengre() {
-    this.setState((prevState) => {
-      let updState = JSON.parse(JSON.stringify(prevState));
-      updState.searchByTitle.status = false;
-      updState.searchByGengre.status = true;
-      return updState;
+    this.clickButton = (isTitleStatus) => {
+      this.setState((prevState) => {
+        const { searchByTitle, searchByGengre } = prevState;
+        return {
+          searchByTitle: { ...searchByTitle, status: isTitleStatus },
+          searchByGengre: { ...searchByGengre, status: !isTitleStatus }
+        }
+      })
     }
-    );
   }
 
   render() {
@@ -53,20 +44,20 @@ class Search extends React.Component {
     return (
       <div className="search">
         <div className="search-input">
-          <input type="search" placeholder="Search" />
-          <button> SEARCH </button>
+          <input className="search-input-field" type="search" placeholder="Search" />
+          <button className="search-input-button"> SEARCH </button>
         </div>
 
         <div className="search-choise">
-          <label>SEARCH BY</label>
+          <label className="search-by-label">SEARCH BY</label>
 
           <ToggleButton toggleClassName={titleClass}
-            toggleOnClick={() => this.clickTitle()}
+            toggleOnClick={() => { this.clickButton(true) }}
             toggleText={this.state.searchByTitle.label}
           />
 
           <ToggleButton toggleClassName={gengreClass}
-            toggleOnClick={() => this.clickGengre()}
+            toggleOnClick={() => { this.clickButton(false) }}
             toggleText={this.state.searchByGengre.label}
           />
         </div>

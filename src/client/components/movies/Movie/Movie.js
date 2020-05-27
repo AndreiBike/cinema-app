@@ -1,39 +1,34 @@
 import React from 'react';
-import "./Movie.module.css"
+import "./Movie.module.css";
 
-class Movie extends React.Component {
+const Movie = (props) => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: props.movie.id,
-      imageWay: props.movie.imageWay,
-      name: props.movie.name,
-      year: props.movie.year,
-      gengre: props.movie.gengre,
+  const {
+    movie: {
+      id,
+      imageWay,
+      name,
+      year,
+      gengre,
     }
-  }
+  } = props;
 
-  render() {
-    return (
-      <>
-        <div className="movie">
-          <div className="movie-poster">
-            <img src={this.state.imageWay} />
-          </div>
+  return (
+    <div className="movie">
+      <div className="movie-poster">
+        <img src={imageWay} />
+      </div>
 
-          <div className="movie-filmname">
-            <div>{this.state.name}</div>
-            <div> {this.state.year} </div>
-          </div>
+      <div className="movie-filmname">
+        <div>{name}</div>
+        <div> {year} </div>
+      </div>
 
-          <div className="movie-gengre">
-            {this.state.gengre}
-          </div>
-        </div>
-      </>
-    )
-  }
+      <div className="movie-gengre">
+        {gengre}
+      </div>
+    </div>
+  )
 }
 
 export default Movie;

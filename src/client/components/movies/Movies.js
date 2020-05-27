@@ -1,28 +1,28 @@
 import React from 'react';
 import { getAllMovies } from '@root/client/store/store';
 import Movie from '@root/client/components/movies/Movie/Movie'
+import Preloader from '@root/client/components/shared/preloader/Preloader';
 import './Movies.module.css'
-import Preloader from '../shared/preloader/Preloader';
+
 
 class Movies extends React.Component {
 
   constructor() {
     super();
     this.isUnmount = false;
-    this.isLoading = true;
     this.state = {
+      isLoading: false,
       movies: [],
     }
   }
 
   componentDidMount() {
-    this.isLoading = true;
+    this.setState({ isLoading: true });
     getAllMovies().then((mov) => {
       if (this.isUnmount === false) {
-        this.setState({ movies: [...mov] });
+        this.setState({ isLoading: false, movies: [...mov] });
       }
     });
-    this.isLoading = false;
   }
 
   componentWillUnmount() {
@@ -30,36 +30,27 @@ class Movies extends React.Component {
   }
 
   render() {
-
-    if (this.state.movies.length === 0) {
-      if (this.isLoading === true) {
-        return (
-          <div className ="empty-movies">
-            <Preloader />
-          </div>
-        )
-      } else {
-        return (
-          <div className="empty-movies">
-            <span>No films found </span>
-          </div>
-        )
-      }
+    if (this.state.isLoading) {
+      return (
+        <div className="empty-movies">
+          <Preloader />
+        </div>
+      )
     }
-    else {
-
-      let moviesList = this.state.movies.map((movie) => {
-        return (
-          <Movie key={movie.id} movie={movie} />
-        )
-      })
-
+    if (this.state.movies.length) {
+      const renderMovie = (movie) => { return <Movie key={movie.id} movie={movie} /> }
+      let moviesList = this.state.movies.map(renderMovie);
       return (
         <div className="movies">
           {moviesList}
         </div>
       )
     }
+    return (
+      <div className="empty-movies">
+        <span>No films found </span>
+      </div>
+    )
 
   }
 }
