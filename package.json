@@ -7,7 +7,8 @@
     "test": "jest",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
     "start": "cross-env NODE_ENV=production webpack-dev-server --config webpack.config.js",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "cypress": "cypress open"
   },
   "author": "AndreiBike",
   "license": "ISC",

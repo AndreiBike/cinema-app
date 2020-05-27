@@ -11,7 +11,6 @@ module.exports = function (webpackEnv) {
   return {
     //Setting the environment
     entry: "./src/index.js", //entry point
-    target: 'node',
     mode: isEnvDevelopment ? 'development' : 'production',
     output: {// output point
       path: path.join(__dirname, "/dist"),
