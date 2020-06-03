@@ -1,12 +1,17 @@
 import React from 'react';
 import cn from 'classnames';
+import { getSearchMoviesByTitleAction, getSearchMoviesByGengreAction } from '@root/client/reduxStore/actions'
+import { connect } from 'react-redux';
 import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
 import './Search.module.css';
 
-class Search extends React.Component {
+class SearchAPI extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.inputRef = React.createRef();
+
     this.state = {
       searchByTitle: {
         label: "TITLE",
@@ -27,6 +32,15 @@ class Search extends React.Component {
         }
       })
     }
+
+    this.clickSearch = () => {
+      let searchText = this.inputRef.current.value;
+      if (this.state.searchByTitle.status) {
+        this.props.getSearchMoviesByTitle(searchText);
+      } else {
+        this.props.getSearchMoviesByGengre(searchText);
+      }
+    }
   }
 
   render() {
@@ -41,11 +55,18 @@ class Search extends React.Component {
       'active': this.state.searchByGengre.status,
     })
 
+    let searchClass = cn({
+      'search-input-button': true,
+    })
+
     return (
       <div className="search">
         <div className="search-input">
-          <input className="search-input-field" type="search" placeholder="Search" />
-          <button className="search-input-button"> SEARCH </button>
+          <input ref={this.inputRef} className="search-input-field" type="search" placeholder="Search" />
+          <ToggleButton toggleClassName={searchClass}
+            toggleOnClick={this.clickSearch}
+            toggleText='SEARCH'
+          />
         </div>
 
         <div className="search-choise">
@@ -65,5 +86,20 @@ class Search extends React.Component {
     )
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    search: state.searchState,
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    getSearchMoviesByTitle: (searchText) => { dispatch(getSearchMoviesByTitleAction(searchText)) },
+    getSearchMoviesByGengre: (searchText) => { dispatch(getSearchMoviesByGengreAction(searchText)) },
+  }
+}
+
+let Search = connect(mapStateToProps, mapDispatchToProps)(SearchAPI);
 
 export default Search;

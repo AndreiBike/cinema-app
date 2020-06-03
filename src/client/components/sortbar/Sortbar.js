@@ -1,43 +1,42 @@
 import React from 'react';
 import { useState } from 'react';
 import cn from 'classnames';
+import { connect } from 'react-redux';
+import { getAllMoviesSortingByReleasedDateAction, getAllMoviesSortingByRatingAction } from '@root/client/reduxStore/actions';
 import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
 import './Sortbar.module.css';
 
 
-const Sortbar = (props) => {
+const SortbarAPI = (props) => {
 
   let initialState = {
     sortMode: true,
     sortByReleaseDate: {
       label: "RELEASE DATE",
-      status: true,
     },
     sortByRating: {
       label: "RATING",
-      status: false,
     },
   }
 
   const [state, setState] = useState(initialState);
 
-  const clickButton = (prevState, isRatingStatus) => {
-    const { sortMode, sortByRating, sortByReleaseDate } = prevState;
-    setState({
-      sortMode,
-      sortByRating: { ...sortByRating, status: isRatingStatus },
-      sortByReleaseDate: { ...sortByReleaseDate, status: !isRatingStatus }
-    });
+  const clickButton = (isRatingStatus) => {
+    if (isRatingStatus) {
+      props.sortMoviesByRating();
+    } else {
+      props.sortMoviesByReleaseDate();
+    }
   }
 
   let releaseClass = cn({
     "release-button": true,
-    "active": state.sortByReleaseDate.status,
+    "active": props.sortState.sortByReleaseDate
   });
 
   let ratingClass = cn({
     "rating-button": true,
-    "active": state.sortByRating.status,
+    "active": props.sortState.sortByRating
   })
 
   if (state.sortMode) {
@@ -48,15 +47,14 @@ const Sortbar = (props) => {
       </label>
 
         <ToggleButton toggleClassName={releaseClass}
-          toggleOnClick={() => { clickButton(state, false) }}
+          toggleOnClick={() => { clickButton(false) }}
           toggleText={state.sortByReleaseDate.label}
         />
 
         <ToggleButton toggleClassName={ratingClass}
-          toggleOnClick={() => { clickButton(state, true) }}
+          toggleOnClick={() => { clickButton(true) }}
           toggleText={state.sortByRating.label}
         />
-
       </div>
     )
   }
@@ -69,5 +67,20 @@ const Sortbar = (props) => {
     </div>
   )
 }
+
+let mapStateToProps = (state) => {
+  return {
+    sortState: state.sortState,
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    sortMoviesByReleaseDate: () => { dispatch(getAllMoviesSortingByReleasedDateAction()) },
+    sortMoviesByRating: () => { dispatch(getAllMoviesSortingByRatingAction()) },
+  }
+}
+
+let Sortbar = connect(mapStateToProps, mapDispatchToProps)(SortbarAPI)
 
 export default Sortbar;
