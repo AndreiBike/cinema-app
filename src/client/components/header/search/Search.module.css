@@ -42,6 +42,13 @@
   line-height: 24px;
   text-align: center;
   font-family: Montserrat;
+  transform: scale(1,1);
+  transition: 0.5s;
+}
+
+.search-input-button:hover {
+  transform: scale(1.1 , 1.1);
+  transition: 0.5s;
 }
 
 .search-choise{
@@ -95,6 +102,24 @@
   text-align: center;
 }
 
+.gengre-button:hover, .title-button:hover{
+  background-color: rgba(66,66,66, 1);
+  transition: 0.5s;
+}
+
+.gengre-button:not(:hover), .title-button:not(:hover){
+  background-color: rgba(66,66,66, 0.68);
+  transition: 0.5s;
+}
+
 .active{
+  background-color: #F65261;
+}
+
+.active:hover {
+  background-color: #e65261;
+}
+
+.active:not(:hover) {
   background-color: #F65261;
 }

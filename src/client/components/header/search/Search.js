@@ -9,9 +9,7 @@ class SearchAPI extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.inputRef = React.createRef();
-
     this.state = {
       searchByTitle: {
         label: "TITLE",
