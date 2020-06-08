@@ -1,14 +1,24 @@
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import {moviesReducer} from './moviesReducer';
 import { searchReducer } from './searchReducer';
 import { sortReducer } from './sortReducer';
+import {getAllMoviesSaga} from './sessionSaga';
 
-let reducers = combineReducers({
-  moviesState: moviesReducer,
-  searchState: searchReducer,
-  sortState: sortReducer,
-});
 
-let reduxStore = createStore(reducers);
+let getStore = () => {
+  let sagaMiddleware = createSagaMiddleware();
 
-export default reduxStore;
+  let reducers = combineReducers({
+    moviesState: moviesReducer,
+    searchState: searchReducer,
+    sortState: sortReducer,
+  });
+  
+  let reduxStore = createStore(reducers, applyMiddleware(sagaMiddleware));
+  sagaMiddleware.run(getAllMoviesSaga);
+  
+  return reduxStore;  
+}
+
+export default getStore;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import reduxState from '@root/client/reduxStore/reduxStore';
+import getStore from '@root/client/reduxStore/reduxStore';
 import Footer from '@root/client/components/footer/Footer';
 import Header from '@root/client/components/header/Header';
 import Sortbar from '@root/client/components/sortbar/Sortbar';
@@ -21,7 +21,7 @@ const footerLabels = {
 
 const App = (props) => {
   return (
-    <Provider store={reduxState}>
+    <Provider store={getStore()}>
       <div className="app">
         <ErrorBoundary>
           <Header headerLabels={headerLabels} />
