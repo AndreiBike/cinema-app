@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
-import { getSearchMoviesByTitleAction, getSearchMoviesByGengreAction } from '@root/client/reduxStore/actions'
 import { connect } from 'react-redux';
 import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
+import { uploadMoviesAction } from '@root/client/reduxStore/actions';
 import './Search.module.css';
 
 class SearchAPI extends React.Component {
@@ -11,6 +11,7 @@ class SearchAPI extends React.Component {
     super(props);
     this.inputRef = React.createRef();
     this.state = {
+      searchBy: this.props.searchBy,
       searchByTitle: {
         label: "TITLE",
         status: true,
@@ -25,6 +26,7 @@ class SearchAPI extends React.Component {
       this.setState((prevState) => {
         const { searchByTitle, searchByGengre } = prevState;
         return {
+          searchBy: isTitleStatus ? 'title': 'genres',
           searchByTitle: { ...searchByTitle, status: isTitleStatus },
           searchByGengre: { ...searchByGengre, status: !isTitleStatus }
         }
@@ -33,11 +35,12 @@ class SearchAPI extends React.Component {
 
     this.clickSearch = () => {
       let searchText = this.inputRef.current.value;
-      if (this.state.searchByTitle.status) {
-        this.props.getSearchMoviesByTitle(searchText);
-      } else {
-        this.props.getSearchMoviesByGengre(searchText);
-      }
+      this.props.uploadMovies("searching",
+      this.props.sortBy,
+      searchText,
+      this.state.searchBy,
+      0,
+      this.props.total);
     }
   }
 
@@ -51,11 +54,9 @@ class SearchAPI extends React.Component {
     let gengreClass = cn({
       'gengre-button': true,
       'active': this.state.searchByGengre.status,
-    })
+    });
 
-    let searchClass = cn({
-      'search-input-button': true,
-    })
+    let searchClass = cn('search-input-button');
 
     return (
       <div className="search">
@@ -87,14 +88,16 @@ class SearchAPI extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    search: state.searchState,
+    searchText: state.moviesState.searchText,
+    searchBy: state.moviesState.searchBy,
+    sortBy: state.moviesState.sortBy,
+    total: state.moviesState.total,
   }
 }
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    getSearchMoviesByTitle: (searchText) => { dispatch(getSearchMoviesByTitleAction(searchText)) },
-    getSearchMoviesByGengre: (searchText) => { dispatch(getSearchMoviesByGengreAction(searchText)) },
+    uploadMovies: (effect, sortBy, searchText, searchBy, offset) => { dispatch(uploadMoviesAction(effect, sortBy, searchText, searchBy, offset)) }
   }
 }
 

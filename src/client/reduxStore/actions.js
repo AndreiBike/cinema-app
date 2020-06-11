@@ -1,5 +1,81 @@
 import * as types from './actionTypes';
 
+//Uploading movies
+export function uploadMoviesAction(effect,sortBy, searchText, searchBy,offset) {
+  return {
+    type: types.UPLOAD_MOVIES,
+    effect,
+    sortBy,
+    searchText, 
+    searchBy,
+    offset,
+  }
+}
+
+export function uploadMoviesSuccsessAction(reseivedMovies,total,effect,sortBy, searchText,searchBy,offset) {
+  return {
+    type: types.UPLOAD_MOVIES_SUCCSESS,
+    reseivedMovies,
+    total,
+    effect,
+    sortBy,
+    searchText,
+    searchBy,
+    offset
+  }
+}
+
+export function uploadMoviesFailedAction() {
+  return {
+    type: types.UPLOAD_MOVIES_FAILED
+  }
+}
+/*
+//Uploading search movies
+export function uploadSearchMoviesAction(searchInformation){
+  return {
+    type: types.UPLOAD_SEARCH_MOVIES,
+    searchInformation,
+  }
+}
+
+export function uploadSearchMoviesSuccsessAction(reseivedMovies) {
+  return {
+    type: types.UPLOAD_SEARCH_MOVIES_SUCCSESS,
+    reseivedMovies,
+  }
+}
+
+export function uploauploadSearchMoviesFailedAction() {
+  return {
+    type: types.UPLOAD_SEARCH_MOVIES_FAILED,
+  }
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //actions for movies
 export function getAllMoviesAction() {
   return {

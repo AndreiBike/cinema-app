@@ -1,39 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllMovies } from '@root/client/store/store';
+import InfiniteScroll from "react-infinite-scroll-component";
 import Movie from '@root/client/components/movies/Movie/Movie'
 import Preloader from '@root/client/components/shared/preloader/Preloader';
 import './Movies.module.css'
-import { getAllMoviesAction } from '../../reduxStore/actions';
+import { uploadMoviesAction } from '../../reduxStore/actions';
 
 class MoviesAPI extends React.Component {
 
   constructor(props) {
     super(props);
-    this.isUnmount = false;
-    this.state = {
-      isLoading: false,
-      //movies: this.props.movies,
-    }
   }
 
-  /*
   componentDidMount() {
-    this.setState({ isLoading: true });
-    getAllMovies().then((mov) => {
-      if (this.isUnmount === false) {
-        this.setState({ isLoading: false, movies: [...mov] });
-      }
-    });
-  }
-  */
-
-  componentWillUnmount() {
-    this.isUnmount = true;
+    this.props.uploadMovies("loading",
+      this.props.sortBy,
+      this.props.searchText,
+      this.props.searchBy,
+      this.props.offset,
+      this.props.total);
   }
 
   render() {
-    if (this.state.isLoading) {
+    if (this.props.isLoading) {
       return (
         <div className="empty-movies">
           <Preloader />
@@ -44,9 +33,22 @@ class MoviesAPI extends React.Component {
       const renderMovie = (movie) => { return <Movie key={movie.id} movie={movie} /> }
       let moviesList = this.props.movies.map(renderMovie);
       return (
-        <div className="movies">
-          {moviesList}
-        </div>
+        <InfiniteScroll
+          dataLength={this.props.movies.length}
+          next={() => {
+            this.props.uploadMovies("loading",
+              this.props.sortBy,
+              this.props.searchText,
+              this.props.searchBy,
+              this.props.offset,
+              this.props.total)
+          }}
+          hasMore={this.props.total>this.props.offset}
+          loader={<Preloader />}>
+          <div className="movies">
+            {moviesList}
+          </div>
+        </InfiniteScroll>
       )
     }
     return (
@@ -57,7 +59,7 @@ class MoviesAPI extends React.Component {
 
   }
 }
-
+/*
 let mapStateToProps = (state) => {
   let findMovies = state.moviesState.movies.filter((movie) => {
     if (state.searchState.searchByTitle) {
@@ -81,12 +83,26 @@ let mapStateToProps = (state) => {
 
   return {
     movies: findMovies,
+    isLoading: state.moviesState.isLoading,
+  }
+}
+*/
+
+let mapStateToProps = (state) => {
+  return {
+    movies: state.moviesState.movies,
+    isLoading: state.moviesState.isLoading,
+    sortBy: state.moviesState.sortBy,
+    searchText: state.moviesState.searchText,
+    searchBy: state.moviesState.searchBy,
+    offset: state.moviesState.offset,
+    total: state.moviesState.total,
   }
 }
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    getAllMovies: () => { dispatch(getAllMoviesAction()) }
+    uploadMovies: (effect, sortBy, searchText, searchBy, offset) => { dispatch(uploadMoviesAction(effect, sortBy, searchText, searchBy, offset)) }
   }
 }
 

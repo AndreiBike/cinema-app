@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import cn from 'classnames';
 import { connect } from 'react-redux';
-import { getAllMoviesSortingByReleasedDateAction, getAllMoviesSortingByRatingAction } from '@root/client/reduxStore/actions';
 import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
+import { uploadMoviesAction } from '@root/client/reduxStore/actions';
 import './Sortbar.module.css';
 
 
@@ -11,6 +11,7 @@ const SortbarAPI = (props) => {
 
   let initialState = {
     sortMode: true,
+    sortBy: props.sortBy,
     sortByReleaseDate: {
       label: "RELEASE DATE",
     },
@@ -22,21 +23,22 @@ const SortbarAPI = (props) => {
   const [state, setState] = useState(initialState);
 
   const clickButton = (isRatingStatus) => {
-    if (isRatingStatus) {
-      props.sortMoviesByRating();
-    } else {
-      props.sortMoviesByReleaseDate();
-    }
+    props.uploadMovies('sorting',
+      isRatingStatus ? 'vote_average' : 'release_date',
+      props.searchText,
+      props.searchBy,
+      0,
+      props.total)
   }
 
   let releaseClass = cn({
     "release-button": true,
-    "active": props.sortState.sortByReleaseDate
+    "active": (props.sortBy === 'release_date'),
   });
 
   let ratingClass = cn({
     "rating-button": true,
-    "active": props.sortState.sortByRating
+    "active": (props.sortBy === 'vote_average'),
   })
 
   if (state.sortMode) {
@@ -70,14 +72,16 @@ const SortbarAPI = (props) => {
 
 let mapStateToProps = (state) => {
   return {
-    sortState: state.sortState,
+    searchText: state.moviesState.searchText,
+    searchBy: state.moviesState.searchBy,
+    sortBy: state.moviesState.sortBy,
+    total: state.moviesState.total,
   }
 }
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    sortMoviesByReleaseDate: () => { dispatch(getAllMoviesSortingByReleasedDateAction()) },
-    sortMoviesByRating: () => { dispatch(getAllMoviesSortingByRatingAction()) },
+    uploadMovies: (effect, sortBy, searchText, searchBy, offset) => { dispatch(uploadMoviesAction(effect, sortBy, searchText, searchBy, offset)) }
   }
 }
 
