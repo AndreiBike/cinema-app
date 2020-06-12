@@ -8,7 +8,6 @@ import Movies from '@root/client/components/movies/Movies';
 import ErrorBoundary from '@root/client/components/errorBoundary/ErrorBoundary';
 import Description from '@root/client/components/description/Description';
 import './App.module.css';
-import Preloader from './components/shared/preloader/Preloader';
 
 const headerLabels = {
   netflixRoulette: ["NETFLIX", "ROULETTE"],

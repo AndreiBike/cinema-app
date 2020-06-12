@@ -25,29 +25,31 @@ export function moviesReducer(state = initialState, action) {
       }
 
     case types.UPLOAD_MOVIES_SUCCSESS:
-      
       let movies = [];
       for (let movie of action.reseivedMovies) {
         movies.push({
           id: movie.id,
           imageWay: movie.poster_path,
           name: movie.title,
-          year: movie.release_date,
+          year: Number.parseInt(movie.release_date.substr(0,4)),
           gengre: movie.genres.join(', '),
           rating: movie.vote_average,
           duration: movie.runtime,
           description: movie.overview,
         })
       }
-        return {
-          searchText: action.searchText,
-          searchBy: action.searchBy,
-          sortBy: action.sortBy,
-          offset: (action.effect === 'loading') ? state.offset += 9 : 9,
-          total: action.total, 
-          isLoading: false,
-          movies: (action.effect === 'loading') ? state.movies.concat(movies) : movies,
+      return {
+        searchText: action.searchText,
+        searchBy: action.searchBy,
+        sortBy: action.sortBy,
+        offset: (action.effect === 'loading') ? state.offset += 9 : 9,
+        total: action.total,
+        isLoading: false,
+        movies: (action.effect === 'loading') ? state.movies.concat(movies) : movies,
       }
+
+    case types.UPLOAD_MOVIES_FAILED:
+      return state;
     default:
       return state;
   }
