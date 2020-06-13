@@ -34,7 +34,7 @@ class SearchAPI extends React.Component {
     }
 
     this.clickSearch = () => {
-      let searchText = this.inputRef.current.value;
+      const searchText = this.inputRef.current.value;
       this.props.uploadMovies("searching",
       this.props.sortBy,
       searchText,
@@ -86,7 +86,7 @@ class SearchAPI extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     searchText: state.moviesState.searchText,
     searchBy: state.moviesState.searchBy,
@@ -95,12 +95,12 @@ let mapStateToProps = (state) => {
   }
 }
 
-let mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     uploadMovies: (effect, sortBy, searchText, searchBy, offset) => { dispatch(uploadMoviesAction(effect, sortBy, searchText, searchBy, offset)) }
   }
 }
 
-let Search = connect(mapStateToProps, mapDispatchToProps)(SearchAPI);
+const Search = connect(mapStateToProps, mapDispatchToProps)(SearchAPI);
 
 export default Search;

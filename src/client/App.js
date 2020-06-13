@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import reduxStore from '@root/client/reduxStore/reduxStore';
+import { PersistGate} from 'redux-persist/integration/react';
+import reduxPersistStore from '@root/client/reduxStore/reduxStore';
 import Footer from '@root/client/components/footer/Footer';
 import Header from '@root/client/components/header/Header';
 import Sortbar from '@root/client/components/sortbar/Sortbar';
@@ -21,7 +22,8 @@ const footerLabels = {
 
 const App = (props) => {
   return (
-    <Provider store={reduxStore}>
+    <Provider store={reduxPersistStore().reduxStore}>
+      <PersistGate loading={null} persistor = {reduxPersistStore().reduxPersistor}>
       <div className="app">
         <ErrorBoundary>
           <Header headerLabels={headerLabels} />
@@ -31,6 +33,7 @@ const App = (props) => {
           <Footer footerLabels={footerLabels} />
         </ErrorBoundary>
       </div>
+      </PersistGate>
     </Provider>
   )
 }
