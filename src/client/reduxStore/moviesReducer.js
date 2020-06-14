@@ -17,7 +17,6 @@ export function moviesReducer(state = initialState, action) {
         ...state
       }
 
-
     case types.UPLOAD_MOVIES:
       return {
         ...state,
@@ -42,7 +41,7 @@ export function moviesReducer(state = initialState, action) {
         searchText: action.searchText,
         searchBy: action.searchBy,
         sortBy: action.sortBy,
-        offset: (action.effect === 'loading') ? state.offset += 9 : 9,
+        offset: (action.effect === 'loading') ? state.offset += 12 : 12,
         total: action.total,
         isLoading: false,
         movies: (action.effect === 'loading') ? state.movies.concat(movies) : movies,

@@ -1,11 +1,9 @@
 import React from 'react';
 import cn from 'classnames';
-import { connect } from 'react-redux';
 import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
-import { uploadMoviesAction } from '@root/client/reduxStore/actions';
 import './Search.module.css';
 
-class SearchAPI extends React.Component {
+class Search extends React.Component {
 
   constructor(props) {
     super(props);
@@ -85,22 +83,5 @@ class SearchAPI extends React.Component {
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    searchText: state.moviesState.searchText,
-    searchBy: state.moviesState.searchBy,
-    sortBy: state.moviesState.sortBy,
-    total: state.moviesState.total,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    uploadMovies: (effect, sortBy, searchText, searchBy, offset) => { dispatch(uploadMoviesAction(effect, sortBy, searchText, searchBy, offset)) }
-  }
-}
-
-const Search = connect(mapStateToProps, mapDispatchToProps)(SearchAPI);
 
 export default Search;

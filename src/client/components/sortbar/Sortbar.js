@@ -1,13 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import cn from 'classnames';
-import { connect } from 'react-redux';
 import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
-import { uploadMoviesAction } from '@root/client/reduxStore/actions';
 import './Sortbar.module.css';
 
 
-const SortbarAPI = (props) => {
+const Sortbar = (props) => {
 
   let initialState = {
     sortMode: true,
@@ -69,22 +67,5 @@ const SortbarAPI = (props) => {
     </div>
   )
 }
-
-let mapStateToProps = (state) => {
-  return {
-    searchText: state.moviesState.searchText,
-    searchBy: state.moviesState.searchBy,
-    sortBy: state.moviesState.sortBy,
-    total: state.moviesState.total,
-  }
-}
-
-let mapDispatchToProps = (dispatch) => {
-  return {
-    uploadMovies: (effect, sortBy, searchText, searchBy, offset) => { dispatch(uploadMoviesAction(effect, sortBy, searchText, searchBy, offset)) }
-  }
-}
-
-let Sortbar = connect(mapStateToProps, mapDispatchToProps)(SortbarAPI)
 
 export default Sortbar;

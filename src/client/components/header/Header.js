@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Search from '@root/client/components/header/search/Search';
+import {withConnect} from '@root/client/hoc/withConnect';
 import './Header.module.css';
 
 const Header = (props) => {
+
+  const SearchContainer = withConnect(Search);
 
   const {
     headerLabels: {
@@ -20,7 +23,7 @@ const Header = (props) => {
       <div className="header-find-your-movie">
         {findYourMovie}
       </div>
-      <Search />
+      <SearchContainer />
     </div>
   );
 }

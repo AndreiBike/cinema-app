@@ -1,19 +1,18 @@
-import axios from 'axios';
 import * as types from './actionTypes'
-import { call, takeEvery, put, takeLatest } from 'redux-saga/effects';
+import { call, takeEvery, put} from 'redux-saga/effects';
 import { uploadMoviesSuccsessAction, uploadMoviesFailedAction } from './actions';
 
-function getMoviesFromInet(sortBy, searchText, searchBy, offset) {
-  return axios.get(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=${'asc'}&search=${searchText}&searchBy=${searchBy}&offset=${offset}&limit=9`).then((response) => {
-    return response.data;
-  })
+async function getMoviesFromInet(sortBy, searchText, searchBy, offset) {
+  const response = await fetch(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=${'asc'}&search=${searchText}&searchBy=${searchBy}&offset=${offset}&limit=12`);
+  console.log(offset);
+  return response.json();
 }
 
 export function* getAllMoviesSaga() {
   yield takeEvery(types.UPLOAD_MOVIES, getAllMoviesAsync);
 }
 
-function* getAllMoviesAsync(action) {
+export function* getAllMoviesAsync(action) {
   try {
     let response = yield call(() => getMoviesFromInet(action.sortBy,
       action.searchText,
@@ -28,6 +27,7 @@ function* getAllMoviesAsync(action) {
       action.offset
     ));
   } catch {
+    console.log("Error in saga");
     yield put(uploadMoviesFailedAction());
   }
 }
