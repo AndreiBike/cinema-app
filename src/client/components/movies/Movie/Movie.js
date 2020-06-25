@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Movie.module.css";
+import { Link } from 'react-router-dom';
 
 const Movie = (props) => {
 
@@ -14,20 +15,22 @@ const Movie = (props) => {
   } = props;
 
   return (
-    <div className="movie">
-      <div className="movie-poster">
-        <img src={imageWay} />
-      </div>
+    <Link to={`/film/${id}`}>
+      <div className="movie">
+        <div className="movie-poster">
+          <img src={imageWay} />
+        </div>
 
-      <div className="movie-filmname">
-        <div>{name}</div>
-        <div> {year} </div>
-      </div>
+        <div className="movie-filmname">
+          <div>{name}</div>
+          <div> {year} </div>
+        </div>
 
-      <div className="movie-gengre">
-        {gengre}
+        <div className="movie-gengre">
+          {gengre}
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

@@ -17,7 +17,8 @@ module.exports = function (webpackEnv) {
     mode: isEnvDevelopment ? 'development' : 'production',
     output: {// output point
       path: path.join(__dirname, "/dist"),
-      filename: "./main.js"
+      filename: "./main.js",
+      publicPath: '/'
     },
     plugins: [
       //Plugin for HTML webpack;
@@ -39,7 +40,8 @@ module.exports = function (webpackEnv) {
       compress: true,
       port: 3000, //number of port of our server
       watchContentBase: true,  //watching for the content in folders
-      progress: true
+      progress: true,
+      historyApiFallback: true
 
     } : undefined,
     devtool: isEnvDevelopment ? 'source-map' : undefined,
