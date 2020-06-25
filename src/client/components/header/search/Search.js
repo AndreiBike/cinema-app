@@ -54,13 +54,11 @@ class Search extends React.Component {
       'active': this.state.searchByGengre.status,
     });
 
-    let searchClass = cn('search-input-button');
-
     return (
       <div className="search">
         <div className="search-input">
           <input ref={this.inputRef} className="search-input-field" type="search" placeholder="Search" />
-          <ToggleButton toggleClassName={searchClass}
+          <ToggleButton toggleClassName='search-input-button'
             toggleOnClick={this.clickSearch}
             toggleText='SEARCH'
           />
