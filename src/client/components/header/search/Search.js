@@ -24,7 +24,7 @@ class Search extends React.Component {
       this.setState((prevState) => {
         const { searchByTitle, searchByGengre } = prevState;
         return {
-          searchBy: isTitleStatus ? 'title': 'genres',
+          searchBy: isTitleStatus ? 'title' : 'genres',
           searchByTitle: { ...searchByTitle, status: isTitleStatus },
           searchByGengre: { ...searchByGengre, status: !isTitleStatus }
         }
@@ -33,12 +33,14 @@ class Search extends React.Component {
 
     this.clickSearch = () => {
       const searchText = this.inputRef.current.value;
-      this.props.uploadMovies("searching",
-      this.props.sortBy,
-      searchText,
-      this.state.searchBy,
-      0,
-      this.props.total);
+      this.props.uploadMovies({
+        effect: "searching",
+        sortBy: this.props.sortBy,
+        searchText: searchText,
+        searchBy: this.state.searchBy,
+        offset: 0,
+        total: this.props.total
+      });
     }
   }
 

@@ -11,11 +11,13 @@ class Movies extends React.Component {
   }
 
   componentDidMount() {
-    this.props.uploadMovies("loading",
-      this.props.sortBy,
-      this.props.searchText,
-      this.props.searchBy,
-      this.props.offset);
+    this.props.uploadMovies({
+      effect: "loading",
+      sortBy: this.props.sortBy,
+      searchText: this.props.searchText,
+      searchBy: this.props.searchBy,
+      offset: this.props.offset
+    });
   }
 
   render() {
@@ -33,13 +35,15 @@ class Movies extends React.Component {
         <InfiniteScroll
           dataLength={this.props.movies.length}
           next={() => {
-            this.props.uploadMovies("loading",
-              this.props.sortBy,
-              this.props.searchText,
-              this.props.searchBy,
-              this.props.offset)
+            this.props.uploadMovies({
+              effect: "loading",
+              sortBy: this.props.sortBy,
+              searchText: this.props.searchText,
+              searchBy: this.props.searchBy,
+              offset: this.props.offset
+            })
           }}
-          hasMore={this.props.total>this.props.offset}
+          hasMore={this.props.total > this.props.offset}
           loader={<Preloader />}>
           <div className="movies">
             {moviesList}

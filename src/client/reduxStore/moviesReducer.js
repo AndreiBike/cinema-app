@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 
-let initialState = {
+const initialState = {
   searchText: '',
   searchBy: 'title',
   sortBy: 'release_date',
@@ -25,7 +25,7 @@ export function moviesReducer(state = initialState, action) {
 
     case types.UPLOAD_MOVIES_SUCCSESS:
       let movies = [];
-      for (let movie of action.reseivedMovies) {
+      for (let movie of action.payload.reseivedMovies) {
         movies.push({
           id: movie.id,
           imageWay: movie.poster_path,
@@ -38,13 +38,13 @@ export function moviesReducer(state = initialState, action) {
         })
       }
       return {
-        searchText: action.searchText,
-        searchBy: action.searchBy,
-        sortBy: action.sortBy,
-        offset: (action.effect === 'loading') ? state.offset += 12 : 12,
-        total: action.total,
+        searchText: action.payload.searchText,
+        searchBy: action.payload.searchBy,
+        sortBy: action.payload.sortBy,
+        offset: (action.payload.effect === 'loading') ? state.offset += 12 : 12,
+        total: action.payload.total,
         isLoading: false,
-        movies: (action.effect === 'loading') ? state.movies.concat(movies) : movies,
+        movies: (action.payload.effect === 'loading') ? state.movies.concat(movies) : movies,
       }
 
     case types.UPLOAD_MOVIES_FAILED:
