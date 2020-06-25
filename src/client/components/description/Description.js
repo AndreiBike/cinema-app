@@ -1,5 +1,4 @@
 import React from 'react';
-import { getMovieById } from "@root/client/store/store"
 import Head from './head/Head'
 import Specification from './specification/Specification'
 import './Description.module.css'
@@ -23,7 +22,7 @@ class Description extends React.Component {
       }
     }
   }
-
+/*
   componentDidMount() {
     getMovieById(2).then((mov) => {
       if (this.isUnmount === false) {
@@ -33,7 +32,7 @@ class Description extends React.Component {
       }
     })
   }
-
+*/
   componentWillUnmount() {
     this.isUnmount = true;
   }

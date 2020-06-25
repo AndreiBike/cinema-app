@@ -1,49 +1,50 @@
 import React from 'react';
-import { getAllMovies } from '@root/client/store/store';
+import InfiniteScroll from "react-infinite-scroll-component";
 import Movie from '@root/client/components/movies/Movie/Movie'
 import Preloader from '@root/client/components/shared/preloader/Preloader';
 import './Movies.module.css'
 
-
 class Movies extends React.Component {
 
-  constructor() {
-    super();
-    this.isUnmount = false;
-    this.state = {
-      isLoading: false,
-      movies: [],
-    }
+  constructor(props) {
+    super(props);
   }
 
   componentDidMount() {
-    this.setState({ isLoading: true });
-    getAllMovies().then((mov) => {
-      if (this.isUnmount === false) {
-        this.setState({ isLoading: false, movies: [...mov] });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    this.isUnmount = true;
+    this.props.uploadMovies("loading",
+      this.props.sortBy,
+      this.props.searchText,
+      this.props.searchBy,
+      this.props.offset);
   }
 
   render() {
-    if (this.state.isLoading) {
+    if (this.props.isLoading) {
       return (
         <div className="empty-movies">
           <Preloader />
         </div>
       )
     }
-    if (this.state.movies.length) {
+    if (this.props.movies.length) {
       const renderMovie = (movie) => { return <Movie key={movie.id} movie={movie} /> }
-      let moviesList = this.state.movies.map(renderMovie);
+      let moviesList = this.props.movies.map(renderMovie);
       return (
-        <div className="movies">
-          {moviesList}
-        </div>
+        <InfiniteScroll
+          dataLength={this.props.movies.length}
+          next={() => {
+            this.props.uploadMovies("loading",
+              this.props.sortBy,
+              this.props.searchText,
+              this.props.searchBy,
+              this.props.offset)
+          }}
+          hasMore={this.props.total>this.props.offset}
+          loader={<Preloader />}>
+          <div className="movies">
+            {moviesList}
+          </div>
+        </InfiniteScroll>
       )
     }
     return (

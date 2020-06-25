@@ -6,7 +6,8 @@ import Search from './Search';
 configure({ adapter: new Adapter() });
 
 describe("<Search> component testing", () => {
-  const component = mount(<Search />);
+  const searchHandleClicked = jest.fn();
+  const component = mount(<Search uploadMovies = {searchHandleClicked}/>);
 
   it("test #1 component should exist", () => {
     expect(component).toBeTruthy();
@@ -24,5 +25,11 @@ describe("<Search> component testing", () => {
     titleButton.simulate('click');
     expect(component.state().searchByTitle.status).toEqual(true);
     expect(component.state().searchByGengre.status).toEqual(false);
-  })
+  });
+
+  it("test #4 Search button pressed", ()=>{
+    const searchButton = component.find('.search-input-button');
+    searchButton.simulate('click');
+    expect(searchHandleClicked.mock.calls.length).toEqual(1);
+  });
 });

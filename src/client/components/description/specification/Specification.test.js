@@ -2,7 +2,6 @@ import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Specification from './Specification';
-import {data} from '@root/client/store/store'
 
 configure({adapter: new Adapter()});
 
@@ -11,7 +10,17 @@ describe("<Specification /> component testing", ()=>{
 
   beforeEach(()=>{
     
-    movieTest = data.movies[0];
+    movieTest = {
+      id: 1,
+      imageWay: './assets/poster.jpg',
+      name: "Avengers: Infinity War",
+      year: 2020,
+      gengre: "Action & Adventure",
+      rating: 4.3,
+      duration: 154,
+      description: "Pulp Fiction is a 1994 American crime film written and directed by Quentin Tarantino; it is based on a story by Tarantino and Roger Avary.[4] Starring John Travolta, Samuel L. Jackson, Bruce Willis, Tim Roth, Ving Rhames, and Uma Thurman, it tells several stories of criminal Los Angeles. The film's title refers to the pulp magazines and hardboiled crime novels popular during the mid-20th century, known for their graphic violence and punchy dialogue."
+    };
+
     component = mount(<Specification movie = {movieTest} />);
   })
 

@@ -7,7 +7,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 module.exports = function (webpackEnv) {
   
   const isEnvDevelopment = process.env.NODE_ENV === 'development';
-
+ /* let devFlagPlugin = new webpack.DefinePlugin({
+    __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+  });
+*/
   return {
     //Setting the environment
     entry: "./src/index.js", //entry point
@@ -23,7 +26,11 @@ module.exports = function (webpackEnv) {
       new CopyPlugin([{
         from: path.join(__dirname, "/src/client/images"),
         to: 'assets'
-      }])
+      }]),
+      //Plugin for Redux devtool
+     // new webpack.HotModuleReplacementPlugin(),
+     // new webpack.NoEmitOnErrorsPlugin,
+     // devFlagPlugin
     ], //template for index.html file
 
     //Setting the DevServer

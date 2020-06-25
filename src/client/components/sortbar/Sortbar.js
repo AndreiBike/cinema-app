@@ -9,35 +9,34 @@ const Sortbar = (props) => {
 
   let initialState = {
     sortMode: true,
+    sortBy: props.sortBy,
     sortByReleaseDate: {
       label: "RELEASE DATE",
-      status: true,
     },
     sortByRating: {
       label: "RATING",
-      status: false,
     },
   }
 
   const [state, setState] = useState(initialState);
 
-  const clickButton = (prevState, isRatingStatus) => {
-    const { sortMode, sortByRating, sortByReleaseDate } = prevState;
-    setState({
-      sortMode,
-      sortByRating: { ...sortByRating, status: isRatingStatus },
-      sortByReleaseDate: { ...sortByReleaseDate, status: !isRatingStatus }
-    });
+  const clickButton = (isRatingStatus) => {
+    props.uploadMovies('sorting',
+      isRatingStatus ? 'vote_average' : 'release_date',
+      props.searchText,
+      props.searchBy,
+      0,
+      props.total)
   }
 
   let releaseClass = cn({
     "release-button": true,
-    "active": state.sortByReleaseDate.status,
+    "active": (props.sortBy === 'release_date'),
   });
 
   let ratingClass = cn({
     "rating-button": true,
-    "active": state.sortByRating.status,
+    "active": (props.sortBy === 'vote_average'),
   })
 
   if (state.sortMode) {
@@ -48,15 +47,14 @@ const Sortbar = (props) => {
       </label>
 
         <ToggleButton toggleClassName={releaseClass}
-          toggleOnClick={() => { clickButton(state, false) }}
+          toggleOnClick={() => { clickButton(false) }}
           toggleText={state.sortByReleaseDate.label}
         />
 
         <ToggleButton toggleClassName={ratingClass}
-          toggleOnClick={() => { clickButton(state, true) }}
+          toggleOnClick={() => { clickButton(true) }}
           toggleText={state.sortByRating.label}
         />
-
       </div>
     )
   }

@@ -7,7 +7,9 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
+    this.inputRef = React.createRef();
     this.state = {
+      searchBy: this.props.searchBy,
       searchByTitle: {
         label: "TITLE",
         status: true,
@@ -22,10 +24,21 @@ class Search extends React.Component {
       this.setState((prevState) => {
         const { searchByTitle, searchByGengre } = prevState;
         return {
+          searchBy: isTitleStatus ? 'title': 'genres',
           searchByTitle: { ...searchByTitle, status: isTitleStatus },
           searchByGengre: { ...searchByGengre, status: !isTitleStatus }
         }
       })
+    }
+
+    this.clickSearch = () => {
+      const searchText = this.inputRef.current.value;
+      this.props.uploadMovies("searching",
+      this.props.sortBy,
+      searchText,
+      this.state.searchBy,
+      0,
+      this.props.total);
     }
   }
 
@@ -39,13 +52,16 @@ class Search extends React.Component {
     let gengreClass = cn({
       'gengre-button': true,
       'active': this.state.searchByGengre.status,
-    })
+    });
 
     return (
       <div className="search">
         <div className="search-input">
-          <input className="search-input-field" type="search" placeholder="Search" />
-          <button className="search-input-button"> SEARCH </button>
+          <input ref={this.inputRef} className="search-input-field" type="search" placeholder="Search" />
+          <ToggleButton toggleClassName='search-input-button'
+            toggleOnClick={this.clickSearch}
+            toggleText='SEARCH'
+          />
         </div>
 
         <div className="search-choise">
