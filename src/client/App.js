@@ -12,6 +12,7 @@ import ErrorBoundary from '@root/client/components/errorBoundary/ErrorBoundary';
 import Description from '@root/client/components/description/Description';
 import { withConnect } from '@root/client/hoc/withConnect';
 import './App.module.css';
+import { withIdConnection } from './hoc/withIdConnect';
 
 const headerLabels = {
   netflixRoulette: ["NETFLIX", "ROULETTE"],
@@ -24,6 +25,7 @@ const footerLabels = {
 
 const SortbarContainer = withConnect(Sortbar);
 const MoviesContainer = withConnect(Movies);
+const DescriptionContainer = withIdConnection(Description)
 
 const App = (props) => {
   return (
@@ -33,7 +35,7 @@ const App = (props) => {
           <div className="app">
             <ErrorBoundary>
               <Switch>
-                <Route path="/film/:id" render={() => <Description headerLabels={headerLabels} />} />
+                <Route path="/film/:id" render={({match}) => <DescriptionContainer headerLabels={headerLabels} match = {match}/>} />
                 <Route path="/" render={() => <Header headerLabels={headerLabels} />} />
               </Switch>
               <SortbarContainer />

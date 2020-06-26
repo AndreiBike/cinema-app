@@ -6,8 +6,6 @@ export function uploadMoviesFailedAction() {
   }
 }
 
-
-
 export function uploadMoviesAction(payload) {
   return {
     type: types.UPLOAD_MOVIES,
@@ -19,5 +17,25 @@ export function uploadMoviesSuccsessAction(payload) {
   return {
     type: types.UPLOAD_MOVIES_SUCCSESS,
     payload
+  }
+}
+
+export function uploadIdMovieAction(payload) {
+  return {
+    type: types.UPLOAD_ID_MOVIE,
+    payload
+  }
+}
+
+export function uploadIdMovieSuccsessAction(payload) {
+  return {
+    type: types.UPLOAD_ID_MOVIE_SUCCSESS,
+    payload
+  }
+}
+
+export function uploadIdMovieFailedAction() {
+  return {
+    type: types.UPLOAD_ID_MOVIE_FAILED,
   }
 }

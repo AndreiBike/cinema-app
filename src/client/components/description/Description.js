@@ -22,17 +22,12 @@ class Description extends React.Component {
       }
     }
   }
-/*
+
   componentDidMount() {
-    getMovieById(2).then((mov) => {
-      if (this.isUnmount === false) {
-        this.setState({
-          movie: mov
-        })
-      }
-    })
+    //console.log(this.props.match.params.id);
+    this.props.uploadIdMovie({id: this.props.match.params.id});
   }
-*/
+
   componentWillUnmount() {
     this.isUnmount = true;
   }
@@ -41,7 +36,7 @@ class Description extends React.Component {
     return (
       <div className="description">
         <Head headerLabels={this.props.headerLabels}/>
-        <Specification movie={this.state.movie} />
+        <Specification movie={this.props.movie} />
       </div>
     )
   }

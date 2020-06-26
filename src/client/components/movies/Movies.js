@@ -2,7 +2,10 @@ import React from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Movie from '@root/client/components/movies/Movie/Movie'
 import Preloader from '@root/client/components/shared/preloader/Preloader';
-import './Movies.module.css'
+import {withIdConnect} from '@root/client/hoc/withIdConnect';
+import './Movies.module.css';
+import { withIdConnection } from '../../hoc/withIdConnect';
+
 
 class Movies extends React.Component {
 

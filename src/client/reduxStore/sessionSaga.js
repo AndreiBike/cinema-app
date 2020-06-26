@@ -1,10 +1,9 @@
 import * as types from './actionTypes'
-import { call, takeEvery, put} from 'redux-saga/effects';
+import { call, takeEvery, put } from 'redux-saga/effects';
 import { uploadMoviesSuccsessAction, uploadMoviesFailedAction } from './actions';
 
 async function getMoviesFromInet(sortBy, searchText, searchBy, offset) {
   const response = await fetch(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=${'asc'}&search=${searchText}&searchBy=${searchBy}&offset=${offset}&limit=12`);
-  console.log(offset);
   return response.json();
 }
 
@@ -18,13 +17,15 @@ export function* getAllMoviesAsync(action) {
       action.payload.searchText,
       action.payload.searchBy,
       action.payload.offset));
-    yield put(uploadMoviesSuccsessAction({reseivedMovies: response.data,
+    yield put(uploadMoviesSuccsessAction({
+      reseivedMovies: response.data,
       total: response.total,
       effect: action.payload.effect,
       sortBy: action.payload.sortBy,
       searchText: action.payload.searchText,
       searchBy: action.payload.searchBy,
-      offset: action.payload.offset}
+      offset: action.payload.offset
+    }
     ));
   } catch {
     console.log("Error in saga");
