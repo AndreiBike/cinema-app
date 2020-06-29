@@ -10,22 +10,23 @@ class Description extends React.Component {
     super(props);
     this.isUnmount = false;
     this.state = {
-      movie: {
-        id: 1,
-        name: "Avengers infinity war",
-        imageWay: './assets/poster.jpg',
-        rating: 4.3,
-        gengre: "Action & Adventure",
-        year: 1994,
-        duration: 154,
-        description: "Pulp Fiction is a 1994 American crime film written and directed by Quentin Tarantino; it is based on a story by Tarantino and Roger Avary.[4] Starring John Travolta, Samuel L. Jackson, Bruce Willis, Tim Roth, Ving Rhames, and Uma Thurman, it tells several stories of criminal Los Angeles. The film's title refers to the pulp magazines and hardboiled crime novels popular during the mid-20th century, known for their graphic violence and punchy dialogue."
-      }
+      id: this.props.match.params.id,
     }
+    console.log(props);
   }
 
   componentDidMount() {
-    //console.log(this.props.match.params.id);
-    this.props.uploadIdMovie({id: this.props.match.params.id});
+    this.props.uploadIdMovie({ id: this.props.match.params.id });
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.match.params.id !== prevState.id) {
+      nextProps.uploadIdMovie({ id: nextProps.match.params.id })
+      return {
+        id: nextProps.match.params.id
+      }
+    }
+    return null;
   }
 
   componentWillUnmount() {
@@ -35,7 +36,7 @@ class Description extends React.Component {
   render() {
     return (
       <div className="description">
-        <Head headerLabels={this.props.headerLabels}/>
+        <Head headerLabels={this.props.headerLabels} />
         <Specification movie={this.props.movie} />
       </div>
     )

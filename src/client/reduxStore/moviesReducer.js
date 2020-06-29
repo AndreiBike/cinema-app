@@ -12,10 +12,6 @@ const initialState = {
 
 export function moviesReducer(state = initialState, action) {
   switch (action.type) {
-    case types.GET_ALL_MOVIES:
-      return {
-        ...state
-      }
 
     case types.UPLOAD_MOVIES:
       return {
@@ -30,7 +26,7 @@ export function moviesReducer(state = initialState, action) {
           id: movie.id,
           imageWay: movie.poster_path,
           name: movie.title,
-          year: Number.parseInt(movie.release_date.substr(0,4)),
+          year: Number.parseInt(movie.release_date.substr(0, 4)),
           gengre: movie.genres.join(', '),
           rating: movie.vote_average,
           duration: movie.runtime,
@@ -49,6 +45,19 @@ export function moviesReducer(state = initialState, action) {
 
     case types.UPLOAD_MOVIES_FAILED:
       return state;
+
+    case types.CHANGE_SEARCH_TEXT:
+      return {
+        ...state,
+        searchText: action.payload.searchText,
+      }
+
+      case types.CHANGE_SEARCH_TYPE:
+        return {
+          ...state,
+          searchBy: action.payload.searchBy,
+        }
+
     default:
       return state;
   }

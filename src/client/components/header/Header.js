@@ -23,7 +23,7 @@ const Header = (props) => {
       <div className="header-find-your-movie">
         {findYourMovie}
       </div>
-      <SearchContainer />
+      <SearchContainer match = {props.match}/>
     </div>
   );
 }

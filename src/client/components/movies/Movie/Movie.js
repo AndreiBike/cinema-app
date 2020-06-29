@@ -15,7 +15,7 @@ const Movie = (props) => {
   } = props;
 
   return (
-    <Link to={`/film/${id}`} onClick = {() => alert("Hallo react") }>
+    <Link to={`/film/${id}`}>
       <div className="movie">
         <div className="movie-poster">
           <img src={imageWay} />

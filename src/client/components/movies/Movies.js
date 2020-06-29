@@ -12,7 +12,7 @@ class Movies extends React.Component {
   constructor(props) {
     super(props);
   }
-
+/*
   componentDidMount() {
     this.props.uploadMovies({
       effect: "loading",
@@ -22,7 +22,7 @@ class Movies extends React.Component {
       offset: this.props.offset
     });
   }
-
+*/
   render() {
     if (this.props.isLoading) {
       return (

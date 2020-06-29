@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import { uploadMoviesAction } from '@root/client/reduxStore/actions';
+import { changeSearchTextAction, changeSearchTypeAction } from '../reduxStore/actions';
 
 export const withConnect = (Component) => {
 
@@ -17,7 +18,9 @@ export const withConnect = (Component) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-      uploadMovies: (effect, sortBy, searchText, searchBy, offset) => { dispatch(uploadMoviesAction(effect, sortBy, searchText, searchBy, offset)) }
+      uploadMovies: (effect, sortBy, searchText, searchBy, offset) => { dispatch(uploadMoviesAction(effect, sortBy, searchText, searchBy, offset)) },
+      changeSearchText: (searchText) => {dispatch(changeSearchTextAction(searchText))},
+      changeSearchType: (searchBy) => {dispatch(changeSearchTypeAction(searchBy))}
     }
   }
 

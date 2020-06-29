@@ -39,3 +39,17 @@ export function uploadIdMovieFailedAction() {
     type: types.UPLOAD_ID_MOVIE_FAILED,
   }
 }
+
+export function changeSearchTextAction(payload) {
+  return {
+    type: types.CHANGE_SEARCH_TEXT,
+    payload,
+  }
+}
+
+export function changeSearchTypeAction(payload) {
+  return {
+    type: types.CHANGE_SEARCH_TYPE,
+    payload,
+  }
+}
