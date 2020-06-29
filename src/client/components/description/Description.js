@@ -1,6 +1,7 @@
 import React from 'react';
-import Head from './head/Head'
-import Specification from './specification/Specification'
+import Head from './head/Head';
+import Specification from './specification/Specification';
+import Preloader from '@root/client/components/shared/preloader/Preloader';
 import './Description.module.css'
 
 
@@ -8,35 +9,25 @@ class Description extends React.Component {
 
   constructor(props) {
     super(props);
-    this.isUnmount = false;
     this.state = {
       id: this.props.match.params.id,
     }
-    console.log(props);
   }
 
   componentDidMount() {
     this.props.uploadIdMovie({ id: this.props.match.params.id });
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.match.params.id !== prevState.id) {
-      nextProps.uploadIdMovie({ id: nextProps.match.params.id })
-      return {
-        id: nextProps.match.params.id
-      }
-    }
-    return null;
-  }
-
-  componentWillUnmount() {
-    this.isUnmount = true;
-  }
-
   render() {
+    if (this.props.isLoading) {
+      return (
+        <Preloader />
+      )
+    }
+
     return (
       <div className="description">
-        <Head headerLabels={this.props.headerLabels} />
+        <Head headerLabels={this.props.headerLabels} searchText={this.props.searchText} />
         <Specification movie={this.props.movie} />
       </div>
     )

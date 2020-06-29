@@ -32,7 +32,10 @@ class Movies extends React.Component {
       )
     }
     if (this.props.movies.length) {
-      const renderMovie = (movie) => { return <Movie key={movie.id} movie={movie} /> }
+      const renderMovie = (movie) => { 
+        const MovieContainer = withIdConnection(Movie);
+        return <MovieContainer key={movie.id} movieDescription={movie} /> 
+      }
       let moviesList = this.props.movies.map(renderMovie);
       return (
         <InfiniteScroll

@@ -1,11 +1,12 @@
 import React from 'react';
 import "./Movie.module.css";
 import { Link } from 'react-router-dom';
+import {withIdConnection} from '@root/client/hoc/withIdConnect'
+
 
 const Movie = (props) => {
-
   const {
-    movie: {
+    movieDescription: {
       id,
       imageWay,
       name,
@@ -15,7 +16,7 @@ const Movie = (props) => {
   } = props;
 
   return (
-    <Link to={`/film/${id}`}>
+    <Link to={`/film/${id}`} onClick = {()=> {props.uploadIdMovie({id: id})}}>
       <div className="movie">
         <div className="movie-poster">
           <img src={imageWay} />

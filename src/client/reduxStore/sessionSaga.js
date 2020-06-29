@@ -2,7 +2,7 @@ import * as types from './actionTypes'
 import { call, takeEvery, put } from 'redux-saga/effects';
 import { uploadMoviesSuccsessAction, uploadMoviesFailedAction } from './actions';
 
-async function getMoviesFromInet(sortBy, searchText, searchBy, offset) {
+export async function getMoviesFromInet(sortBy, searchText, searchBy, offset) {
   const response = await fetch(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=${'asc'}&search=${searchText}&searchBy=${searchBy}&offset=${offset}&limit=12`);
   return response.json();
 }

@@ -26,17 +26,22 @@ const footerLabels = {
 const SortbarContainer = withConnect(Sortbar);
 const MoviesContainer = withConnect(Movies);
 const DescriptionContainer = withConnect(withIdConnection(Description));
+//
 
 const App = (props) => {
   return (
     <BrowserRouter>
       <Provider store={reduxPersistStore().reduxStore}>
-      {/*  <PersistGate loading={null} persistor={reduxPersistStore().reduxPersistor}> */}
+        <PersistGate loading={null} persistor={reduxPersistStore().reduxPersistor}>
           <div className="app">
             <ErrorBoundary>
               <Switch>
-                <Route path="/film/:id" render={({match}) => <DescriptionContainer headerLabels={headerLabels} match = {match}/>} />
-                <Route path="/" render={({match}) => <Header headerLabels={headerLabels} match = {match}/>} />
+                <Route exact path="/" render={() => {
+                  window.location.href = window.location.href + 'search/';
+                }} />
+                <Route exact path="/search/" render={() => <Header headerLabels={headerLabels} />} />
+                <Route path="/film/:id" render={({ match }) => <DescriptionContainer headerLabels={headerLabels} match={match} />} />
+                <Route path="/search/:searchText" render={({ match }) => <Header headerLabels={headerLabels} match={match} />} />
               </Switch>
               <SortbarContainer />
               <MoviesContainer />
@@ -44,7 +49,7 @@ const App = (props) => {
               <ScrollUpButton />
             </ErrorBoundary>
           </div>
-    {/*    </PersistGate>  */}
+        </PersistGate>
       </Provider>
     </BrowserRouter>
   )

@@ -26,7 +26,7 @@ module.exports = function (webpackEnv) {
       //Plugin for copying images;
       new CopyPlugin([{
         from: path.join(__dirname, "/src/client/images"),
-        to: 'assets'
+        to: '/assets'
       }]),
       //Plugin for Redux devtool
      // new webpack.HotModuleReplacementPlugin(),

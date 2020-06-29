@@ -12,7 +12,7 @@ const sagaMiddleware = createSagaMiddleware();
 const persistConfig = {
   key: 'movies',
   storage: storage,
-  whitelist: ['moviesState']
+  whitelist: ['movieIdState'],
 }
 
 const reducers = combineReducers({
@@ -22,7 +22,7 @@ const reducers = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-const reduxStore = createStore(reducers, applyMiddleware(sagaMiddleware));
+const reduxStore = createStore(persistedReducer, applyMiddleware(sagaMiddleware));
 const reduxPersistor = persistStore(reduxStore);
 sagaMiddleware.run(getAllMoviesSaga);
 sagaMiddleware.run(getIdMovieSaga);

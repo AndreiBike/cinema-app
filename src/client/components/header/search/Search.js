@@ -9,7 +9,6 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       searchByTitle: {
         label: "TITLE",
@@ -29,7 +28,6 @@ class Search extends React.Component {
     }
 
     this.clickSearch = () => {
-
       this.props.uploadMovies({
         effect: "searching",
         sortBy: this.props.sortBy,
@@ -40,18 +38,18 @@ class Search extends React.Component {
       });
     }
   }
-  /*
-    componentDidMount() {
-      this.props.uploadMovies({
-        effect: "searching",
-        sortBy: this.props.sortBy,
-        searchText: this.props.searchText,
-        searchBy: this.props.searchBy,
-        offset: 0,
-        total: this.props.total
-      });
-    }
-    */
+
+  componentDidMount() {
+    this.props.uploadMovies({
+      effect: "searching",
+      sortBy: this.props.sortBy,
+      searchText: this.props.match ? this.props.match.params.searchText : '',
+      searchBy: this.props.searchBy,
+      offset: 0,
+      total: this.props.total
+    });
+  }
+
 
   render() {
     let titleClass = cn({

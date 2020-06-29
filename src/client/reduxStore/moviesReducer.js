@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 
 const initialState = {
+  effect: 'loading',
   searchText: '',
   searchBy: 'title',
   sortBy: 'release_date',
@@ -33,7 +34,9 @@ export function moviesReducer(state = initialState, action) {
           description: movie.overview,
         })
       }
+      
       return {
+        effect: action.payload.effect,
         searchText: action.payload.searchText,
         searchBy: action.payload.searchBy,
         sortBy: action.payload.sortBy,
