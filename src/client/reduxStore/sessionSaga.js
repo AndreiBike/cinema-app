@@ -3,6 +3,7 @@ import { call, takeEvery, put } from 'redux-saga/effects';
 import { uploadMoviesSuccsessAction, uploadMoviesFailedAction } from './actions';
 
 export async function getMoviesFromInet(sortBy, searchText, searchBy, offset) {
+  //console.log(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=${'asc'}&search=${searchText}&searchBy=${searchBy}&offset=${offset}&limit=12`)
   const response = await fetch(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortBy}&sortOrder=${'asc'}&search=${searchText}&searchBy=${searchBy}&offset=${offset}&limit=12`);
   return response.json();
 }

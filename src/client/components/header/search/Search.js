@@ -34,7 +34,6 @@ class Search extends React.Component {
         searchText: this.props.searchText,
         searchBy: this.props.searchBy,
         offset: 0,
-        total: this.props.total
       });
     }
   }
@@ -44,9 +43,8 @@ class Search extends React.Component {
       effect: "searching",
       sortBy: this.props.sortBy,
       searchText: this.props.match ? this.props.match.params.searchText : '',
-      searchBy: this.props.searchBy,
+      searchBy: "title",
       offset: 0,
-      total: this.props.total
     });
   }
 

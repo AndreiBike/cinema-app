@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 
 const initialState = {
+  descriptionMode: false,
   effect: 'loading',
   searchText: '',
   searchBy: 'title',
@@ -18,6 +19,13 @@ export function moviesReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: !state.movies.length,
+        descriptionMode: false,
+      }
+
+    case types.UPLOAD_ID_MOVIE:
+      return {
+        ...state,
+        descriptionMode: true,
       }
 
     case types.UPLOAD_MOVIES_SUCCSESS:
@@ -36,6 +44,7 @@ export function moviesReducer(state = initialState, action) {
       }
       
       return {
+        ...state,
         effect: action.payload.effect,
         searchText: action.payload.searchText,
         searchBy: action.payload.searchBy,

@@ -1,6 +1,7 @@
 import * as types from './actionTypes';
 import { call, takeEvery, put } from 'redux-saga/effects';
-import { uploadIdMovieSuccsessAction, uploadIdMovieFailedAction } from './actions';
+import {getMoviesFromInet} from './sessionSaga';
+import { uploadIdMovieSuccsessAction, uploadIdMovieFailedAction, uploadMoviesSuccsessAction} from './actions';
 
 async function getIdMovieFromInet(id) {
     const response = await fetch(`https://reactjs-cdp.herokuapp.com/movies/${id}`);
@@ -13,16 +14,34 @@ export function* getIdMovieSaga() {
 
 function* getIdMovieAsync(action) {
     try {
+        //console.log(action);
         let response = yield call(() => getIdMovieFromInet(action.payload.id));
-
         yield put(uploadIdMovieSuccsessAction({
             response
         }));
 
-        
+        //console.log(response);
 
-    } catch {
-        console.log("Error in saga 2");
+        let moviesWithSameGenres = yield call(()=> getMoviesFromInet(action.payload.sortBy,
+            response.genres[0],
+            action.payload.searchBy,
+            action.payload.offset));
+
+        //console.log(moviesWithSameGenres);
+
+        yield put(uploadMoviesSuccsessAction({
+            reseivedMovies: moviesWithSameGenres.data,
+            total: moviesWithSameGenres.total,
+            effect: "description",
+            sortBy: action.payload.sortBy,
+            searchText: response.genres[0],
+            searchBy: action.payload.searchBy,
+            offset: action.payload.offset
+          }
+          ));
+
+    } catch (e) {
+        console.log(e);
         yield put(uploadIdMovieFailedAction())
     }
 }

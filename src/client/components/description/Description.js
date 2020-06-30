@@ -15,7 +15,12 @@ class Description extends React.Component {
   }
 
   componentDidMount() {
-    this.props.uploadIdMovie({ id: this.props.match.params.id });
+    this.props.uploadIdMovie({
+      id: this.props.match.params.id,
+      searchBy: 'genres',
+      sortBy: 'release_date',
+      offset: 0,
+    });
   }
 
   render() {
@@ -27,7 +32,7 @@ class Description extends React.Component {
 
     return (
       <div className="description">
-        <Head headerLabels={this.props.headerLabels} searchText={this.props.searchText} />
+        <Head headerLabels={this.props.headerLabels} searchText={this.props.searchText} movie = {this.props.movie} />
         <Specification movie={this.props.movie} />
       </div>
     )

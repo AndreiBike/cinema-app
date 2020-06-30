@@ -31,7 +31,7 @@ const Sortbar = (props) => {
     })
   }
 
-  if (state.sortMode) {
+  if (!props.descriptionMode) {
     return (
       <div className="sortbar">
         <label>
@@ -60,7 +60,7 @@ const Sortbar = (props) => {
   return (
     <div className="sortbar">
       <div className="sortbar-same-gengre">
-        Films by Drama gengre
+        Films by {props.movie.gengre.split(', ')[0]} genre
         </div>
     </div>
   )

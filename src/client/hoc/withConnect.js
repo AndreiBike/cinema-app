@@ -6,6 +6,7 @@ export const withConnect = (Component) => {
 
   const mapStateToProps = (state) => {
     return {
+      descriptionMode: state.moviesState.descriptionMode,
       effect: state.moviesState.effect,
       movies: state.moviesState.movies,
       isLoading: state.moviesState.isLoading,

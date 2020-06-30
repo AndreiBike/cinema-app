@@ -11,8 +11,10 @@ import Movies from '@root/client/components/movies/Movies';
 import ErrorBoundary from '@root/client/components/errorBoundary/ErrorBoundary';
 import Description from '@root/client/components/description/Description';
 import { withConnect } from '@root/client/hoc/withConnect';
-import './App.module.css';
 import { withIdConnection } from './hoc/withIdConnect';
+import NotFound from '@root/client/components/notFound/NotFound';
+import './App.module.css';
+
 
 const headerLabels = {
   netflixRoulette: ["NETFLIX", "ROULETTE"],
@@ -23,10 +25,19 @@ const footerLabels = {
   netflixRoulette: ["NETFLIX", "ROULETTE"],
 }
 
-const SortbarContainer = withConnect(Sortbar);
+const SortbarContainer = withIdConnection(withConnect(Sortbar));
 const MoviesContainer = withConnect(Movies);
 const DescriptionContainer = withConnect(withIdConnection(Description));
-//
+const BottomPart = () => {
+  return (
+    <>
+      <SortbarContainer />
+      <MoviesContainer />
+      <Footer footerLabels={footerLabels} />
+      <ScrollUpButton />
+    </>
+  )
+}
 
 const App = (props) => {
   return (
@@ -39,14 +50,36 @@ const App = (props) => {
                 <Route exact path="/" render={() => {
                   window.location.href = window.location.href + 'search/';
                 }} />
-                <Route exact path="/search/" render={() => <Header headerLabels={headerLabels} />} />
-                <Route path="/film/:id" render={({ match }) => <DescriptionContainer headerLabels={headerLabels} match={match} />} />
-                <Route path="/search/:searchText" render={({ match }) => <Header headerLabels={headerLabels} match={match} />} />
+                <Route exact path="/search/" render={() => {
+                  return (
+                    <>
+                      <Header headerLabels={headerLabels} />
+                      <BottomPart />
+                    </>
+                  )
+                }} />
+                <Route exact path="/film/:id" render={({ match }) => {
+                  return (
+                    <>
+                      <DescriptionContainer headerLabels={headerLabels} match={match} />
+                      <BottomPart />
+                    </>
+                  )
+                }} />
+                <Route exact path="/search/:searchText" render={({ match }) => {
+                  return (
+                    <>
+                      <Header headerLabels={headerLabels} match={match} />
+                      <BottomPart />
+                    </>
+                  )
+                }} />
+                <Route path="*" render = {()=>{
+                  return(
+                    <NotFound />
+                  )
+                }} />
               </Switch>
-              <SortbarContainer />
-              <MoviesContainer />
-              <Footer footerLabels={footerLabels} />
-              <ScrollUpButton />
             </ErrorBoundary>
           </div>
         </PersistGate>
