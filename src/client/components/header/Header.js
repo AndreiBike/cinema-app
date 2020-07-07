@@ -4,15 +4,16 @@ import Search from '@root/client/components/header/search/Search';
 import {withConnect} from '@root/client/hoc/withConnect';
 import './Header.module.css';
 
-const Header = (props) => {
+const SearchContainer = withConnect(Search);
 
-  const SearchContainer = withConnect(Search);
+const Header = (props) => {
 
   const {
     headerLabels: {
       netflixRoulette,
       findYourMovie,
-    }
+    },
+    match,
   } = props;
 
   return (
@@ -23,13 +24,14 @@ const Header = (props) => {
       <div className="header-find-your-movie">
         {findYourMovie}
       </div>
-      <SearchContainer match = {props.match}/>
+      <SearchContainer match = {match}/>
     </div>
   );
 }
 
 Header.propTypes = {
   headerLabels: PropTypes.object,
+  match: PropTypes.object,
 }
 
 Header.defaultProps = {

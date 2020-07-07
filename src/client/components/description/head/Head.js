@@ -9,7 +9,8 @@ const Head = (props) => {
   const {
     headerLabels: {
       netflixRoulette,
-    }
+    },
+    movie,
   } = props;
 
   return (
@@ -18,7 +19,7 @@ const Head = (props) => {
         <span className="head-netflix-roulette-bold">{netflixRoulette[0]}</span>{netflixRoulette[1]}
       </label>
       <div className="head-search-icon">
-        <Link to={`/search/${props.movie.name}`} >
+        <Link to={`/search/${movie.name}`} >
           <img src={searchIcon} />
         </Link>
       </div>
@@ -28,6 +29,7 @@ const Head = (props) => {
 
 Head.propTypes = {
   headerLabels: PropTypes.object,
+  movie: PropTypes.object,
 }
 
 Head.defaultProps = {

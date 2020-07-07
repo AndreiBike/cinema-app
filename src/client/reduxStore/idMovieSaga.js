@@ -14,20 +14,16 @@ export function* getIdMovieSaga() {
 
 function* getIdMovieAsync(action) {
     try {
-        //console.log(action);
+
         let response = yield call(() => getIdMovieFromInet(action.payload.id));
         yield put(uploadIdMovieSuccsessAction({
             response
         }));
 
-        //console.log(response);
-
         let moviesWithSameGenres = yield call(()=> getMoviesFromInet(action.payload.sortBy,
             response.genres[0],
             action.payload.searchBy,
             action.payload.offset));
-
-        //console.log(moviesWithSameGenres);
 
         yield put(uploadMoviesSuccsessAction({
             reseivedMovies: moviesWithSameGenres.data,

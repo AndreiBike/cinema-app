@@ -30,12 +30,12 @@ const MoviesContainer = withConnect(Movies);
 const DescriptionContainer = withConnect(withIdConnection(Description));
 const BottomPart = () => {
   return (
-    <>
+    <React.Fragment>
       <SortbarContainer />
       <MoviesContainer />
       <Footer footerLabels={footerLabels} />
       <ScrollUpButton />
-    </>
+    </React.Fragment>
   )
 }
 
@@ -52,26 +52,26 @@ const App = (props) => {
                 }} />
                 <Route exact path="/search/" render={() => {
                   return (
-                    <>
+                    <React.Fragment>
                       <Header headerLabels={headerLabels} />
                       <BottomPart />
-                    </>
+                    </React.Fragment>
                   )
                 }} />
                 <Route exact path="/film/:id" render={({ match }) => {
                   return (
-                    <>
+                    <React.Fragment>
                       <DescriptionContainer headerLabels={headerLabels} match={match} />
                       <BottomPart />
-                    </>
+                    </React.Fragment>
                   )
                 }} />
                 <Route exact path="/search/:searchText" render={({ match }) => {
                   return (
-                    <>
+                    <React.Fragment>
                       <Header headerLabels={headerLabels} match={match} />
                       <BottomPart />
-                    </>
+                    </React.Fragment>
                   )
                 }} />
                 <Route path="*" render = {()=>{

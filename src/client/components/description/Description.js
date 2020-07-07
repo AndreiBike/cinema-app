@@ -1,42 +1,53 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Head from './head/Head';
 import Specification from './specification/Specification';
 import Preloader from '@root/client/components/shared/preloader/Preloader';
-import './Description.module.css'
+import {useEffect} from 'react';
+import './Description.module.css';
 
+const Description = (props) => {
 
-class Description extends React.Component {
+  const {
+    headerLabels,
+    searchText,
+    movie,
+    isLoading,
+    uploadIdMovie,
+    match,
+  } = props;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: this.props.match.params.id,
-    }
-  }
-
-  componentDidMount() {
-    this.props.uploadIdMovie({
-      id: this.props.match.params.id,
+  useEffect(() => {
+    uploadIdMovie({
+      id: match.params.id,
       searchBy: 'genres',
       sortBy: 'release_date',
       offset: 0,
     });
-  }
+  }, [])
 
-  render() {
-    if (this.props.isLoading) {
-      return (
-        <Preloader />
-      )
-    }
 
+  if (isLoading) {
     return (
-      <div className="description">
-        <Head headerLabels={this.props.headerLabels} searchText={this.props.searchText} movie = {this.props.movie} />
-        <Specification movie={this.props.movie} />
-      </div>
+      <Preloader />
     )
   }
+
+  return (
+    <div className="description">
+      <Head headerLabels={headerLabels} searchText={searchText} movie = {movie} />
+      <Specification movie={movie} />
+    </div>
+  )
+}
+
+Description.propTypes = {
+  headerLabels: PropTypes.object,
+  searchText: PropTypes.string,
+  movie: PropTypes.object,
+  isLoading: PropTypes.bool,
+  uploadIdMovie: PropTypes.func,
+  match: PropTypes.object,
 }
 
 export default Description;

@@ -75,12 +75,18 @@ class Search extends React.Component {
         <div className="search-choise">
           <label className="search-by-label">SEARCH BY</label>
 
-          <ToggleButton toggleClassName={titleClass}
+          <ToggleButton toggleClassName={cn({
+            'title-button': true,
+            'active': this.props.searchBy === 'title',
+          })}
             toggleOnClick={() => { this.clickButton(true) }}
             toggleText={this.state.searchByTitle.label}
           />
 
-          <ToggleButton toggleClassName={gengreClass}
+          <ToggleButton toggleClassName={cn({
+            'gengre-button': true,
+            'active': this.props.searchBy === 'genres',
+          })}
             toggleOnClick={() => { this.clickButton(false) }}
             toggleText={this.state.searchByGengre.label}
           />

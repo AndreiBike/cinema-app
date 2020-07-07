@@ -60,8 +60,8 @@ const Sortbar = (props) => {
   return (
     <div className="sortbar">
       <div className="sortbar-same-gengre">
-        Films by {props.movie.gengre.split(', ')[0]} genre
-        </div>
+          Films by {props.movie.gengre.split(', ')[0]} genre
+      </div>
     </div>
   )
 }
