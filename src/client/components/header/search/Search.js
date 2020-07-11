@@ -50,20 +50,10 @@ class Search extends React.Component {
 
 
   render() {
-    let titleClass = cn({
-      'title-button': true,
-      'active': this.props.searchBy === 'title',
-    });
-
-    let gengreClass = cn({
-      'gengre-button': true,
-      'active': this.props.searchBy === 'genres',
-    });
-
     return (
       <div className="search">
         <div className="search-input">
-          <input value={this.props.searchText} onChange={(e) => { this.props.changeSearchText({ searchText: e.target.value }) }} className="search-input-field" type="search" placeholder="Search" />
+          <input value={this.props.searchText} onChange={({ target: { value } }) => this.props.changeSearchText({ value })} className="search-input-field" type="search" placeholder="Search" />
           <Link to={`/search/${this.props.searchText}`}>
             <ToggleButton toggleClassName='search-input-button'
               toggleOnClick={this.clickSearch}

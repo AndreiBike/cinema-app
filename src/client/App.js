@@ -1,5 +1,6 @@
 import React from 'react';
 import ScrollUpButton from "react-scroll-up-button";
+import {compose} from 'redux';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -25,9 +26,9 @@ const footerLabels = {
   netflixRoulette: ["NETFLIX", "ROULETTE"],
 }
 
-const SortbarContainer = withIdConnection(withConnect(Sortbar));
+const SortbarContainer = compose(withIdConnection, withConnect)(Sortbar);
 const MoviesContainer = withConnect(Movies);
-const DescriptionContainer = withConnect(withIdConnection(Description));
+const DescriptionContainer = compose(withIdConnection, withConnect)(Description);
 const BottomPart = () => {
   return (
     <React.Fragment>

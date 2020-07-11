@@ -53,3 +53,9 @@ export function changeSearchTypeAction(payload) {
     payload,
   }
 }
+
+export function disableDescriptionModeAction(){
+  return{
+    type: types.DISABLE_DESCRIPTION_MODE,
+  }
+}

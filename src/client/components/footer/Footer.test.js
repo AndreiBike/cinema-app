@@ -1,5 +1,6 @@
 import React from 'react';
 import {configure, render} from 'enzyme';
+import renderer from 'react-test-renderer';
 import Adapter from 'enzyme-adapter-react-16';
 import Footer from './Footer';
 
@@ -9,9 +10,9 @@ const footerLabelsTest = {
   netflixRoulette: ["NETFLIX", "ROULETTE"],
 };
 
+const component = renderer.create(<Footer footerLabels = {footerLabelsTest} />).toJSON();
+
 describe("<Footer> Snapshot", () => {
-  const component = render(<Footer footerLabels = {footerLabelsTest} />);
-  
   it('+++capturing snapshot of Footer', () => {
     expect(component).toMatchSnapshot();
   })

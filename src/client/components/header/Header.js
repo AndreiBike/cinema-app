@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Search from '@root/client/components/header/search/Search';
-import {withConnect} from '@root/client/hoc/withConnect';
+import { withConnect } from '@root/client/hoc/withConnect';
 import './Header.module.css';
 
 const SearchContainer = withConnect(Search);
@@ -24,19 +24,22 @@ const Header = (props) => {
       <div className="header-find-your-movie">
         {findYourMovie}
       </div>
-      <SearchContainer match = {match}/>
+      <SearchContainer match={match} />
     </div>
   );
 }
 
 Header.propTypes = {
-  headerLabels: PropTypes.object,
+  headerLabel: PropTypes.shape({
+    netflixRoulette: PropTypes.arrayOf(PropTypes.oneOf(['netflix', 'roulette'])),
+    findYourMovie: PropTypes.string
+  }),
   match: PropTypes.object,
 }
 
 Header.defaultProps = {
   headerLabels: {
-    netflixRoulette: ["netflix","roulette"],
+    netflixRoulette: ["netflix", "roulette"],
     findYourMovie: "find your movie",
   }
 }

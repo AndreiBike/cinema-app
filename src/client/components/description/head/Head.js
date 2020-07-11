@@ -28,8 +28,19 @@ const Head = (props) => {
 }
 
 Head.propTypes = {
-  headerLabels: PropTypes.object,
-  movie: PropTypes.object,
+  headerLabel: PropTypes.shape({
+    netflixRoulette: PropTypes.arrayOf(PropTypes.oneOf(['netflix', 'roulette'])),
+    findYourMovie: PropTypes.string
+  }),
+  movie: PropTypes.shape({
+    name: PropTypes.string,
+    imageWay: PropTypes.string,
+    rating: PropTypes.number,
+    gengre: PropTypes.string,
+    year: PropTypes.number,
+    duration: PropTypes.number,
+    description: PropTypes.string,
+  }),
 }
 
 Head.defaultProps = {

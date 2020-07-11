@@ -1,3 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Header /> component testing test #1 snapshot testing 1`] = `ShallowWrapper {}`;
+exports[`<Header /> component testing test #1 snapshot testing 1`] = `
+<div
+  className="header"
+>
+  <p
+    className="header-netflixroulette"
+  >
+    <span
+      className="header-netflixroulette-bold"
+    >
+      NETFLIX
+    </span>
+    ROULETTE
+  </p>
+  <div
+    className="header-find-your-movie"
+  >
+    FIND YOUR MOVIE
+  </div>
+  <div
+    className="search"
+  >
+    <div
+      className="search-input"
+    >
+      <input
+        className="search-input-field"
+        onChange={[Function]}
+        placeholder="Search"
+        type="search"
+        value=""
+      />
+      <a
+        href="/search/"
+        onClick={[Function]}
+      >
+        <button
+          className="search-input-button"
+          onClick={[Function]}
+        >
+          <span>
+            SEARCH
+          </span>
+        </button>
+      </a>
+    </div>
+    <div
+      className="search-choise"
+    >
+      <label
+        className="search-by-label"
+      >
+        SEARCH BY
+      </label>
+      <button
+        className="title-button active"
+        onClick={[Function]}
+      >
+        <span>
+          TITLE
+        </span>
+      </button>
+      <button
+        className="gengre-button"
+        onClick={[Function]}
+      >
+        <span>
+          GENGRE
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

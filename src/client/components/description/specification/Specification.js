@@ -42,7 +42,15 @@ const Specification = (props) => {
 }
 
 Specification.propTypes = {
-  movie: PropTypes.object,
+  movie: PropTypes.shape({
+    name: PropTypes.string,
+    imageWay: PropTypes.string,
+    rating: PropTypes.number,
+    gengre: PropTypes.string,
+    year: PropTypes.number,
+    duration: PropTypes.number,
+    description: PropTypes.string,
+  }),
 }
 
 export default Specification;

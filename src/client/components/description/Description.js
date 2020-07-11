@@ -15,6 +15,7 @@ const Description = (props) => {
     isLoading,
     uploadIdMovie,
     match,
+    disableDescription,
   } = props;
 
   useEffect(() => {
@@ -24,6 +25,11 @@ const Description = (props) => {
       sortBy: 'release_date',
       offset: 0,
     });
+
+    return function cleanup(){
+      disableDescription();
+    }
+
   }, [])
 
 

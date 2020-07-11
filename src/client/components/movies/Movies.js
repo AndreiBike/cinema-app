@@ -5,6 +5,11 @@ import Preloader from '@root/client/components/shared/preloader/Preloader';
 import './Movies.module.css';
 import { withIdConnection } from '../../hoc/withIdConnect';
 
+const renderMovie = (movie) => {
+  const MovieContainer = React.memo(withIdConnection(Movie));
+  return <MovieContainer key={movie.id} movieDescription={movie} />
+};
+
 const Movies = (props) => {
 
   const {
@@ -17,11 +22,6 @@ const Movies = (props) => {
     total,
     uploadMovies,
   } = props;
-
-  const renderMovie = (movie) => {
-    const MovieContainer = React.memo(withIdConnection(Movie));
-    return <MovieContainer key={movie.id} movieDescription={movie} />
-  };
 
   if (isLoading) {
     return (
@@ -36,7 +36,7 @@ const Movies = (props) => {
     return (
       <InfiniteScroll
         dataLength={movies.length}
-        next={() => {
+        next={React.memo(() => {
           uploadMovies({
             effect: "loading",
             sortBy: sortBy,
@@ -44,7 +44,7 @@ const Movies = (props) => {
             searchBy: searchBy,
             offset: offset
           })
-        }}
+        })}
         hasMore={total > offset}
         loader={<Preloader />}>
         <div className="movies">

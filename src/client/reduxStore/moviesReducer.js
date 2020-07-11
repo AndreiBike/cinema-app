@@ -19,13 +19,18 @@ export function moviesReducer(state = initialState, action) {
       return {
         ...state,
         isLoading: !state.movies.length,
-        descriptionMode: false,
       }
 
     case types.UPLOAD_ID_MOVIE:
       return {
         ...state,
         descriptionMode: true,
+      }
+
+    case types.DISABLE_DESCRIPTION_MODE:
+      return {
+        ...state,
+        descriptionMode: false,
       }
 
     case types.UPLOAD_MOVIES_SUCCSESS:
@@ -42,7 +47,7 @@ export function moviesReducer(state = initialState, action) {
           description: movie.overview,
         })
       }
-      
+
       return {
         ...state,
         effect: action.payload.effect,
@@ -64,11 +69,11 @@ export function moviesReducer(state = initialState, action) {
         searchText: action.payload.searchText,
       }
 
-      case types.CHANGE_SEARCH_TYPE:
-        return {
-          ...state,
-          searchBy: action.payload.searchBy,
-        }
+    case types.CHANGE_SEARCH_TYPE:
+      return {
+        ...state,
+        searchBy: action.payload.searchBy,
+      }
 
     default:
       return state;
