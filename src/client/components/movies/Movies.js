@@ -2,58 +2,64 @@ import React from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Movie from '@root/client/components/movies/Movie/Movie'
 import Preloader from '@root/client/components/shared/preloader/Preloader';
-import './Movies.module.css'
+import './Movies.module.css';
+import { withIdConnection } from '../../hoc/withIdConnect';
 
-class Movies extends React.Component {
+const renderMovie = (movie) => {
+  const MovieContainer = React.memo(withIdConnection(Movie));
+  return <MovieContainer key={movie.id} movieDescription={movie} />
+};
 
-  constructor(props) {
-    super(props);
-  }
+const Movies = (props) => {
 
-  componentDidMount() {
-    this.props.uploadMovies("loading",
-      this.props.sortBy,
-      this.props.searchText,
-      this.props.searchBy,
-      this.props.offset);
-  }
+  const {
+    isLoading,
+    movies,
+    sortBy,
+    searchText,
+    searchBy,
+    offset,
+    total,
+    uploadMovies,
+  } = props;
 
-  render() {
-    if (this.props.isLoading) {
-      return (
-        <div className="empty-movies">
-          <Preloader />
-        </div>
-      )
-    }
-    if (this.props.movies.length) {
-      const renderMovie = (movie) => { return <Movie key={movie.id} movie={movie} /> }
-      let moviesList = this.props.movies.map(renderMovie);
-      return (
-        <InfiniteScroll
-          dataLength={this.props.movies.length}
-          next={() => {
-            this.props.uploadMovies("loading",
-              this.props.sortBy,
-              this.props.searchText,
-              this.props.searchBy,
-              this.props.offset)
-          }}
-          hasMore={this.props.total>this.props.offset}
-          loader={<Preloader />}>
-          <div className="movies">
-            {moviesList}
-          </div>
-        </InfiniteScroll>
-      )
-    }
+  if (isLoading) {
     return (
       <div className="empty-movies">
-        <span>No films found </span>
+        <Preloader />
       </div>
     )
-
   }
+
+  if (movies.length) {
+    let moviesList = movies.map(renderMovie);
+    return (
+      <InfiniteScroll
+        dataLength={movies.length}
+        next={React.memo(() => {
+          uploadMovies({
+            effect: "loading",
+            sortBy: sortBy,
+            searchText: searchText,
+            searchBy: searchBy,
+            offset: offset
+          })
+        })}
+        hasMore={total > offset}
+        loader={<Preloader />}>
+        <div className="movies">
+          {moviesList}
+        </div>
+      </InfiniteScroll>
+    )
+  }
+
+  return (
+    <div className="empty-movies">
+      <span>No films found </span>
+    </div>
+  )
+
 }
 
 export default Movies;

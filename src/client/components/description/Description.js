@@ -1,50 +1,59 @@
 import React from 'react';
-import Head from './head/Head'
-import Specification from './specification/Specification'
-import './Description.module.css'
+import PropTypes from 'prop-types';
+import Head from './head/Head';
+import Specification from './specification/Specification';
+import Preloader from '@root/client/components/shared/preloader/Preloader';
+import {useEffect} from 'react';
+import './Description.module.css';
 
+const Description = (props) => {
 
-class Description extends React.Component {
+  const {
+    headerLabels,
+    searchText,
+    movie,
+    isLoading,
+    uploadIdMovie,
+    match,
+    disableDescription,
+  } = props;
 
-  constructor(props) {
-    super(props);
-    this.isUnmount = false;
-    this.state = {
-      movie: {
-        id: 1,
-        name: "Avengers infinity war",
-        imageWay: './assets/poster.jpg',
-        rating: 4.3,
-        gengre: "Action & Adventure",
-        year: 1994,
-        duration: 154,
-        description: "Pulp Fiction is a 1994 American crime film written and directed by Quentin Tarantino; it is based on a story by Tarantino and Roger Avary.[4] Starring John Travolta, Samuel L. Jackson, Bruce Willis, Tim Roth, Ving Rhames, and Uma Thurman, it tells several stories of criminal Los Angeles. The film's title refers to the pulp magazines and hardboiled crime novels popular during the mid-20th century, known for their graphic violence and punchy dialogue."
-      }
+  useEffect(() => {
+    uploadIdMovie({
+      id: match.params.id,
+      searchBy: 'genres',
+      sortBy: 'release_date',
+      offset: 0,
+    });
+
+    return function cleanup(){
+      disableDescription();
     }
-  }
-/*
-  componentDidMount() {
-    getMovieById(2).then((mov) => {
-      if (this.isUnmount === false) {
-        this.setState({
-          movie: mov
-        })
-      }
-    })
-  }
-*/
-  componentWillUnmount() {
-    this.isUnmount = true;
-  }
 
-  render() {
+  }, [])
+
+
+  if (isLoading) {
     return (
-      <div className="description">
-        <Head headerLabels={this.props.headerLabels}/>
-        <Specification movie={this.state.movie} />
-      </div>
+      <Preloader />
     )
   }
+
+  return (
+    <div className="description">
+      <Head headerLabels={headerLabels} searchText={searchText} movie = {movie} />
+      <Specification movie={movie} />
+    </div>
+  )
+}
+
+Description.propTypes = {
+  headerLabels: PropTypes.object,
+  searchText: PropTypes.string,
+  movie: PropTypes.object,
+  isLoading: PropTypes.bool,
+  uploadIdMovie: PropTypes.func,
+  match: PropTypes.object,
 }
 
 export default Description;

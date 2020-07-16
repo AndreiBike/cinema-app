@@ -1,78 +1,82 @@
 import React from 'react';
 import cn from 'classnames';
+import { Link } from 'react-router-dom';
 import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
 import './Search.module.css';
 
 class Search extends React.Component {
 
+
   constructor(props) {
     super(props);
-    this.inputRef = React.createRef();
     this.state = {
-      searchBy: this.props.searchBy,
       searchByTitle: {
         label: "TITLE",
-        status: true,
       },
       searchByGengre: {
         label: "GENGRE",
-        status: false,
       }
     }
 
+
     this.clickButton = (isTitleStatus) => {
-      this.setState((prevState) => {
-        const { searchByTitle, searchByGengre } = prevState;
-        return {
-          searchBy: isTitleStatus ? 'title': 'genres',
-          searchByTitle: { ...searchByTitle, status: isTitleStatus },
-          searchByGengre: { ...searchByGengre, status: !isTitleStatus }
-        }
-      })
+      if (isTitleStatus) {
+        this.props.changeSearchType({ searchBy: 'title' });
+      } else {
+        this.props.changeSearchType({ searchBy: 'genres' });
+      }
     }
 
     this.clickSearch = () => {
-      const searchText = this.inputRef.current.value;
-      this.props.uploadMovies("searching",
-      this.props.sortBy,
-      searchText,
-      this.state.searchBy,
-      0,
-      this.props.total);
+      this.props.uploadMovies({
+        effect: "searching",
+        sortBy: this.props.sortBy,
+        searchText: this.props.searchText,
+        searchBy: this.props.searchBy,
+        offset: 0,
+      });
     }
   }
 
+  componentDidMount() {
+    this.props.uploadMovies({
+      effect: "searching",
+      sortBy: this.props.sortBy,
+      searchText: this.props.match ? this.props.match.params.searchText : '',
+      searchBy: "title",
+      offset: 0,
+    });
+  }
+
+
   render() {
-
-    let titleClass = cn({
-      'title-button': true,
-      'active': this.state.searchByTitle.status,
-    });
-
-    let gengreClass = cn({
-      'gengre-button': true,
-      'active': this.state.searchByGengre.status,
-    });
-
     return (
       <div className="search">
         <div className="search-input">
-          <input ref={this.inputRef} className="search-input-field" type="search" placeholder="Search" />
-          <ToggleButton toggleClassName='search-input-button'
-            toggleOnClick={this.clickSearch}
-            toggleText='SEARCH'
-          />
+          <input value={this.props.searchText} onChange={({ target: { value } }) => this.props.changeSearchText({ value })} className="search-input-field" type="search" placeholder="Search" />
+          <Link to={`/search/${this.props.searchText}`}>
+            <ToggleButton toggleClassName='search-input-button'
+              toggleOnClick={this.clickSearch}
+              toggleText='SEARCH'
+            />
+          </Link>
         </div>
 
         <div className="search-choise">
           <label className="search-by-label">SEARCH BY</label>
 
-          <ToggleButton toggleClassName={titleClass}
+          <ToggleButton toggleClassName={cn({
+            'title-button': true,
+            'active': this.props.searchBy === 'title',
+          })}
             toggleOnClick={() => { this.clickButton(true) }}
             toggleText={this.state.searchByTitle.label}
           />
 
-          <ToggleButton toggleClassName={gengreClass}
+          <ToggleButton toggleClassName={cn({
+            'gengre-button': true,
+            'active': this.props.searchBy === 'genres',
+          })}
             toggleOnClick={() => { this.clickButton(false) }}
             toggleText={this.state.searchByGengre.label}
           />

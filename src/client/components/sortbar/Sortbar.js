@@ -21,37 +21,35 @@ const Sortbar = (props) => {
   const [state, setState] = useState(initialState);
 
   const clickButton = (isRatingStatus) => {
-    props.uploadMovies('sorting',
-      isRatingStatus ? 'vote_average' : 'release_date',
-      props.searchText,
-      props.searchBy,
-      0,
-      props.total)
+    props.uploadMovies({
+      effect: 'sorting',
+      sortBy: isRatingStatus ? 'vote_average' : 'release_date',
+      searchText: props.searchText,
+      searchBy: props.searchBy,
+      offset: 0,
+      total: props.total
+    })
   }
 
-  let releaseClass = cn({
-    "release-button": true,
-    "active": (props.sortBy === 'release_date'),
-  });
-
-  let ratingClass = cn({
-    "rating-button": true,
-    "active": (props.sortBy === 'vote_average'),
-  })
-
-  if (state.sortMode) {
+  if (!props.descriptionMode) {
     return (
       <div className="sortbar">
         <label>
           SORT BY
       </label>
 
-        <ToggleButton toggleClassName={releaseClass}
+        <ToggleButton toggleClassName={cn({
+          "release-button": true,
+          "active": (props.sortBy === 'release_date'),
+        })}
           toggleOnClick={() => { clickButton(false) }}
           toggleText={state.sortByReleaseDate.label}
         />
 
-        <ToggleButton toggleClassName={ratingClass}
+        <ToggleButton toggleClassName={cn({
+          "rating-button": true,
+          "active": (props.sortBy === 'vote_average'),
+        })}
           toggleOnClick={() => { clickButton(true) }}
           toggleText={state.sortByRating.label}
         />
@@ -62,8 +60,8 @@ const Sortbar = (props) => {
   return (
     <div className="sortbar">
       <div className="sortbar-same-gengre">
-        Films by Drama gengre
-        </div>
+          Films by {props.movie.gengre.split(', ')[0]} genre
+      </div>
     </div>
   )
 }

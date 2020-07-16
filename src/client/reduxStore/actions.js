@@ -1,32 +1,61 @@
 import * as types from './actionTypes';
 
-//Uploading movies
-export function uploadMoviesAction(effect,sortBy, searchText, searchBy,offset) {
-  return {
-    type: types.UPLOAD_MOVIES,
-    effect,
-    sortBy,
-    searchText, 
-    searchBy,
-    offset,
-  }
-}
-
-export function uploadMoviesSuccsessAction(reseivedMovies,total,effect,sortBy, searchText,searchBy,offset) {
-  return {
-    type: types.UPLOAD_MOVIES_SUCCSESS,
-    reseivedMovies,
-    total,
-    effect,
-    sortBy,
-    searchText,
-    searchBy,
-    offset
-  }
-}
-
 export function uploadMoviesFailedAction() {
   return {
     type: types.UPLOAD_MOVIES_FAILED
+  }
+}
+
+export function uploadMoviesAction(payload) {
+  return {
+    type: types.UPLOAD_MOVIES,
+    payload
+  }
+}
+
+export function uploadMoviesSuccsessAction(payload) {
+  return {
+    type: types.UPLOAD_MOVIES_SUCCSESS,
+    payload
+  }
+}
+
+export function uploadIdMovieAction(payload) {
+  return {
+    type: types.UPLOAD_ID_MOVIE,
+    payload
+  }
+}
+
+export function uploadIdMovieSuccsessAction(payload) {
+  return {
+    type: types.UPLOAD_ID_MOVIE_SUCCSESS,
+    payload
+  }
+}
+
+export function uploadIdMovieFailedAction() {
+  return {
+    type: types.UPLOAD_ID_MOVIE_FAILED,
+  }
+}
+
+export function changeSearchTextAction(payload) {
+  return {
+    type: types.CHANGE_SEARCH_TEXT,
+    payload,
+  }
+}
+
+export function changeSearchTypeAction(payload) {
+  return {
+    type: types.CHANGE_SEARCH_TYPE,
+    payload,
+  }
+}
+
+export function disableDescriptionModeAction(){
+  return{
+    type: types.DISABLE_DESCRIPTION_MODE,
   }
 }

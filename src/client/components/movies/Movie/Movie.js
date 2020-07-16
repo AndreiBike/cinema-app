@@ -1,10 +1,11 @@
 import React from 'react';
 import "./Movie.module.css";
+import { Link } from 'react-router-dom';
+
 
 const Movie = (props) => {
-
   const {
-    movie: {
+    movieDescription: {
       id,
       imageWay,
       name,
@@ -14,20 +15,28 @@ const Movie = (props) => {
   } = props;
 
   return (
-    <div className="movie">
-      <div className="movie-poster">
-        <img src={imageWay} />
-      </div>
+    <Link to={`/film/${id}`} onClick={() => {
+      props.uploadIdMovie({
+        id: id,
+        searchBy: 'genres',
+        sortBy: 'release_date',
+        offset: 0,
+      })
+    }}>
+      <div className="movie">
+        <div className="movie-poster">
+          <img src={imageWay} />
+        </div>
 
-      <div className="movie-filmname">
-        <div>{name}</div>
-        <div> {year} </div>
+        <div className="movie-filmname">
+          <div>{name}</div>
+          <div> {year} </div>
+        </div>
+        <div className="movie-gengre">
+          {gengre}
+        </div>
       </div>
-
-      <div className="movie-gengre">
-        {gengre}
-      </div>
-    </div>
+    </Link>
   )
 }
 

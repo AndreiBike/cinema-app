@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import searchIcon from '@root/client/images/search.png'
 import './Head.module.css'
 
@@ -8,23 +9,38 @@ const Head = (props) => {
   const {
     headerLabels: {
       netflixRoulette,
-    }
+    },
+    movie,
   } = props;
 
   return (
     <div className="head">
       <label className="head-netflix-roulette">
-          <span className="head-netflix-roulette-bold">{netflixRoulette[0]}</span>{netflixRoulette[1]}
-        </label>
+        <span className="head-netflix-roulette-bold">{netflixRoulette[0]}</span>{netflixRoulette[1]}
+      </label>
       <div className="head-search-icon">
-        <img src={searchIcon}/>
+        <Link to={`/search/${movie.name}`} >
+          <img src={searchIcon} />
+        </Link>
       </div>
     </div>
   )
 }
 
 Head.propTypes = {
-  headerLabels: PropTypes.object,
+  headerLabel: PropTypes.shape({
+    netflixRoulette: PropTypes.arrayOf(PropTypes.oneOf(['netflix', 'roulette'])),
+    findYourMovie: PropTypes.string
+  }),
+  movie: PropTypes.shape({
+    name: PropTypes.string,
+    imageWay: PropTypes.string,
+    rating: PropTypes.number,
+    gengre: PropTypes.string,
+    year: PropTypes.number,
+    duration: PropTypes.number,
+    description: PropTypes.string,
+  }),
 }
 
 Head.defaultProps = {
