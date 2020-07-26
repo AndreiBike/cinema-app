@@ -1,16 +1,64 @@
 const webpack = require(`webpack`);
 const path = require("path");
+const nodeExternals = require("webpack-node-externals");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
-
 module.exports = function (webpackEnv) {
-  
+
   const isEnvDevelopment = process.env.NODE_ENV === 'development';
- /* let devFlagPlugin = new webpack.DefinePlugin({
-    __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-  });
-*/
+  const isSSR = process.env.NODE_ENV === 'ssr';
+
+  if (isSSR) {
+    return {
+      entry: './src/server/index.js', //entry point for server
+      target: 'node',
+      externals: [nodeExternals()],
+      output: {
+        path: __dirname,
+        filename: 'server.js',
+        publicPath: '/'
+      },
+      mode: 'development',
+
+      plugins: [
+        
+        new webpack.DefinePlugin({
+          __isBrowser__: "false"
+        })
+      ],
+
+      module: {
+        rules: [
+          {
+            test: /\.m?js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: "babel-loader"
+            }
+          },
+
+          {
+            test: /\.css$/,
+            use: [
+              "isomorphic-style-loader",
+              {
+                loader: "css-loader",
+                options: {
+                  importLoaders: 1
+                }
+              }
+            ]
+          },
+          {
+            test: /\.(png|svg|jpg|gif)$/,
+            use: ["file-loader"]
+          }
+        ]
+      }
+    }
+  }
+
   return {
     //Setting the environment
     entry: "./src/index.js", //entry point
@@ -28,10 +76,14 @@ module.exports = function (webpackEnv) {
         from: path.join(__dirname, "/src/client/images"),
         to: '/assets'
       }]),
+
+      new webpack.DefinePlugin({
+        __isBrowser__: "false"
+      })
       //Plugin for Redux devtool
-     // new webpack.HotModuleReplacementPlugin(),
-     // new webpack.NoEmitOnErrorsPlugin,
-     // devFlagPlugin
+      // new webpack.HotModuleReplacementPlugin(),
+      // new webpack.NoEmitOnErrorsPlugin,
+      // devFlagPlugin
     ], //template for index.html file
 
     //Setting the DevServer
@@ -45,6 +97,7 @@ module.exports = function (webpackEnv) {
 
     } : undefined,
     devtool: isEnvDevelopment ? 'source-map' : undefined,
+
 
     //Setting the modules and rules for modules
     module: {

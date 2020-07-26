@@ -10,8 +10,8 @@ const Footer = (props) => {
   } = props;
 
   return (
-    <div className="footer">
-      <span className="footer-bold-text">{netflixRoulette[0]}</span>{netflixRoulette[1]} 
+    <div className= "footer">
+      <span className="footer-boldt-text">{netflixRoulette[0]}</span>{netflixRoulette[1]} 
     </div>
   )
 }
