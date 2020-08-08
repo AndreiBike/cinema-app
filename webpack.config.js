@@ -7,58 +7,6 @@ const CopyPlugin = require("copy-webpack-plugin");
 module.exports = function (webpackEnv) {
 
   const isEnvDevelopment = process.env.NODE_ENV === 'development';
-  const isSSR = process.env.NODE_ENV === 'ssr';
-
-  if (isSSR) {
-    return {
-      entry: './src/server/index.js', //entry point for server
-      target: 'node',
-      externals: [nodeExternals()],
-      output: {
-        path: __dirname,
-        filename: 'server.js',
-        publicPath: '/'
-      },
-      mode: 'development',
-
-      plugins: [
-        
-        new webpack.DefinePlugin({
-          __isBrowser__: "false"
-        })
-      ],
-
-      module: {
-        rules: [
-          {
-            test: /\.m?js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: "babel-loader"
-            }
-          },
-
-          {
-            test: /\.css$/,
-            use: [
-              "isomorphic-style-loader",
-              {
-                loader: "css-loader",
-                options: {
-                  importLoaders: 1
-                }
-              }
-            ]
-          },
-          {
-            test: /\.(png|svg|jpg|gif)$/,
-            use: ["file-loader"]
-          }
-        ]
-      }
-    }
-  }
-
   return {
     //Setting the environment
     entry: "./src/index.js", //entry point
@@ -78,7 +26,7 @@ module.exports = function (webpackEnv) {
       }]),
 
       new webpack.DefinePlugin({
-        __isBrowser__: "false"
+        __isBrowser__: "true"
       })
       //Plugin for Redux devtool
       // new webpack.HotModuleReplacementPlugin(),

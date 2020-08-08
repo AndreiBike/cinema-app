@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "ssr": "cross-env NODE_ENV=ssr webpack && nodemon server.js",
+    "ssrstart": "node server.js",
+    "ssrbuild": "next build",
+    "ssrserver": "NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
     "start": "cross-env NODE_ENV=production webpack-dev-server --config webpack.config.js",
     "build": "webpack --mode production",
@@ -14,6 +16,7 @@
   "author": "AndreiBike",
   "license": "ISC",
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.2",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.6",
@@ -23,6 +26,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "express": "^4.17.1",
     "memoize-state": "^2.0.15",
+    "next": "^9.4.4",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

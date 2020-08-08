@@ -3,7 +3,7 @@ import ScrollUpButton from "react-scroll-up-button";
 import {compose} from 'redux';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import {Switch, Route } from 'react-router-dom';
 import reduxPersistStore from '@root/client/reduxStore/reduxStore';
 import Footer from '@root/client/components/footer/Footer';
 import Header from '@root/client/components/header/Header';
@@ -16,6 +16,7 @@ import { withIdConnection } from './hoc/withIdConnect';
 import NotFound from '@root/client/components/notFound/NotFound';
 import './App.module.css';
 
+console.log(__isBrowser__);
 
 const headerLabels = {
   netflixRoulette: ["NETFLIX", "ROULETTE"],
@@ -42,7 +43,6 @@ const BottomPart = () => {
 
 const App = (props) => {
   return (
-    <BrowserRouter>
       <Provider store={reduxPersistStore().reduxStore}>
         <PersistGate loading={null} persistor={reduxPersistStore().reduxPersistor}>
           <div className="app">
@@ -85,7 +85,6 @@ const App = (props) => {
           </div>
         </PersistGate>
       </Provider>
-    </BrowserRouter>
   )
 }
 

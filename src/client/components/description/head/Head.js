@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import searchIcon from '@root/client/images/search.png'
+import searchIcon from '@root/client/images/search.png';
+import { useRouter } from 'next/router';
 import './Head.module.css'
 
 const Head = (props) => {
-
+  const router = useRouter();
   const {
     headerLabels: {
       netflixRoulette,
@@ -19,7 +20,13 @@ const Head = (props) => {
         <span className="head-netflix-roulette-bold">{netflixRoulette[0]}</span>{netflixRoulette[1]}
       </label>
       <div className="head-search-icon">
-        <Link to={`/search/${movie.name}`} >
+        <Link to={`/search/${movie.name}`} onClick={() => {
+          if (!__isBrowser__) {
+            router.push(`/search/${movie.name}`);
+          }
+        }
+
+        }>
           <img src={searchIcon} />
         </Link>
       </div>

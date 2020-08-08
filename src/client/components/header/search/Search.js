@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import ToggleButton from '@root/client/components/shared/toggleButton/ToggleButton';
 import './Search.module.css';
 
-class Search extends React.Component {
 
+class Search extends React.Component {
 
   constructor(props) {
     super(props);
@@ -48,12 +48,11 @@ class Search extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div className="search">
         <div className="search-input">
-          <input value={this.props.searchText} onChange={({ target: { value } }) => this.props.changeSearchText({ value })} className="search-input-field" type="search" placeholder="Search" />
+          <input value={this.props.searchText} onChange={(e) => {this.props.changeSearchText({searchText: e.target.value})}} className="search-input-field" type="search" placeholder="Search" />
           <Link to={`/search/${this.props.searchText}`}>
             <ToggleButton toggleClassName='search-input-button'
               toggleOnClick={this.clickSearch}

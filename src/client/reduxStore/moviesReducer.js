@@ -64,6 +64,7 @@ export function moviesReducer(state = initialState, action) {
       return state;
 
     case types.CHANGE_SEARCH_TEXT:
+      console.log(action.payload.searchText);
       return {
         ...state,
         searchText: action.payload.searchText,

@@ -3,6 +3,7 @@
 /dist
 /coverage
 /.pnp
+/.next
 .pnp.js
 .idea/
 yarn.lock

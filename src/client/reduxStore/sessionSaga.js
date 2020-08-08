@@ -14,6 +14,7 @@ export function* getAllMoviesSaga() {
 
 export function* getAllMoviesAsync(action) {
   try {
+    debugger;
     let response = yield call(() => getMoviesFromInet(action.payload.sortBy,
       action.payload.searchText,
       action.payload.searchBy,
